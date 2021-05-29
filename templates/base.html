@@ -46,27 +46,41 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Shop</a>
+              <a class="nav-link" href="{% url 'shop' %}">Shop</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Workouts</a>
             </li>
+            {% if request.user.is_authenticated %}
+              {% if request.user.is_superuser %}
+                  
+              {% endif %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Members Area
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <a class="dropdown-item" href="#">My Profile</a>
+                  <a class="dropdown-item" href="#">Order History</a>
+                  <a class="dropdown-item" href="#">Member Profiles</a>
+                  <a class="nav-link" href="{% url 'account_logout' %}">Sign Out</a>
+                </div>
+              </li>
+            {% else %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Members Area
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a class="dropdown-item" href="{% url 'account_login' %}">Sign In</a>
+                <a class="dropdown-item" href="{% url 'account_signup' %}">Join</a>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Sign Out</a>
-            </li>
+            {% endif %}
+
           </ul>
         </div>
       </nav>
