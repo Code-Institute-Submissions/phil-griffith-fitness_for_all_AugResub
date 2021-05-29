@@ -50,6 +50,8 @@
         </div>
     </a>
 </div>
-<span>{{ products }}</span>
+{% for product in products %}
+    <img src="{{ product.image.url }}" alt="Indoor studio cycle">
+{% endfor %}
 
 {% endblock %}
