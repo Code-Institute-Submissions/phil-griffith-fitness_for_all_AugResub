@@ -50,8 +50,35 @@
         </div>
     </a>
 </div>
-{% for product in products %}
-    <img src="{{ product.image.url }}" alt="Indoor studio cycle">
-{% endfor %}
+
+<div class="row">
+    <div class="card-deck m-auto">
+        {% for product in products %}
+            <div class="col-sm-12 col-md-6 col-lg-4 col-xl-3 mb-2">
+                <div class="card h-100" > 
+                    {% if product.image %}
+                        <a href="">
+                            <img class="card-img-top" src="{{ product.image.url }}" alt="{{ product.name }}" height="322px">
+                        </a>
+                    {% else %}
+                        <a href="">
+                            <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image available">
+                        </a>
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">£{{ product.price}}</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
 
 {% endblock %}
