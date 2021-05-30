@@ -15,11 +15,11 @@
                 <div class="col-2 input-group">
                     <button href="#" id="categories" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</button>
                     <div class="dropdown-menu border-0" aria-labelledby="all-products-link">
-                        <a href="" class="dropdown-item">Equipment</a>
-                        <a href="" class="dropdown-item ">Clothing</a>
-                        <a href="" class="dropdown-item ">Accessories</a>
-                        <a href="" class="dropdown-item ">Nutrition</a>
-                        <a href="" class="dropdown-item">All Products</a>
+                        <a href="{% url 'shop' %}?category=equipment" class="dropdown-item">Equipment</a>
+                        <a href="{% url 'shop' %}?category=clothing" class="dropdown-item ">Clothing</a>
+                        <a href="{% url 'shop' %}?category=accessories" class="dropdown-item ">Accessories</a>
+                        <a href="{% url 'shop' %}?category=nutrition" class="dropdown-item ">Nutrition</a>
+                        <a href="{% url 'shop' %}" class="dropdown-item">All Products</a>
                     </div>
                 </div>
             </div>
