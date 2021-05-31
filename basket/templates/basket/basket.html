@@ -4,12 +4,14 @@
 {% block content %}
     <h1 class="display-4 text-success">Shopping Basket</h1>
 
+
     <div class="container">
         <div class="row">
             <div class="col-6">
                 {% if basket_items %}
                     {% for item in basket_items %}
                         <span>{{ item.product }}</span>
+                        <p class="my-0"><strong>Size: </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
                     {% endfor %}
                 {% else %}
                     <span>Your Basket is empty</span>
