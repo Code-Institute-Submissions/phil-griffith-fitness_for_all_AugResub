@@ -11,6 +11,9 @@
                     {% for item in basket_items %}
                         <span>{{ item.name }}</span>
                     {% endfor %}
+                {% else %}
+                    <span>Your Basket is empty</span>
+                    <a href="">Back to shop</a>
                 {% endif %}
             </div>
             <div class="col-6"></div>
