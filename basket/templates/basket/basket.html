@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load basket_tools %}
 
 {% block content %}
     <h1 class="display-4 text-success">Shopping Basket</h1>
@@ -13,7 +14,7 @@
                         <span>{{ item.product }}</span>
                         <p class="my-0"><strong>Size: </strong>{% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</p>
                         <!-- quantity amend -->
-                        <form class="form update-form" method="POST" action="">
+                        <form class="form update-form" method="POST" action="{% url 'adjust_basket' item.item_id %}">
                             {% csrf_token %}
                             <div class="form-group">
                                 <div class="input-group">
@@ -26,11 +27,12 @@
                                     {% if item.product.has_sizes %}
                                         <input type="hidden" name="product_size" value="{{ item.size }}">
                                     {% endif %}
+                                    <span>{{ item.product.price | calc_subtotal:item.quantity }}</span>
                                 </div>
                             </div>
                         </form>
                         <a class="update-link text-info"><small>Update</small></a>
-                        <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-size="{{ item.size }}"><small>Remove</small></a>
+                        <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
                     {% endfor %}
                     <span>TOTAL: {{ total }}</span>
                 {% else %}
@@ -43,12 +45,13 @@
     </div>   
 {% endblock %}
 
-{% block postloadjs %}
+{% block postload_js %}
 {{ block.super }}
 
 <script type="text/javascript">
     // Update quantity on click
     $('.update-link').click(function(e) {
+        console.log("Update clicked")
         var form = $(this).prev('.update-form');
         form.submit();
     })
@@ -57,9 +60,9 @@
     $('.remove-item').click(function(e) {
         var csrfToken = "{{ csrf_token }}";
         var itemId = $(this).attr('id').split('remove_')[1];
-        var size = $(this).data('size');
-        var url = `/bag/remove/${itemId}`;
-        var data = {'csrfmiddlewaretoken': csrfToken, 'size': size};
+        var size = $(this).data('product_size');
+        var url = `/basket/remove/${itemId}/`;
+        var data = {'csrfmiddlewaretoken': csrfToken, 'product_size': size};
 
         $.post(url, data)
          .done(function() {
