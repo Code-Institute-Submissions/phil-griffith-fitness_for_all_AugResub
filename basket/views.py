@@ -9,6 +9,7 @@ def basket(request):
     return render(request, 'basket/basket.html')
 
 
+# code taken from Code Institute Boutique Ado project
 def add_to_basket(request, item_id):
     """ Add a quantity of the specified product to the shopping basket """
 
@@ -22,5 +23,4 @@ def add_to_basket(request, item_id):
         basket[item_id] = quantity
 
     request.session['basket'] = basket
-    print(request.session['basket'])
     return redirect(redirect_url)
