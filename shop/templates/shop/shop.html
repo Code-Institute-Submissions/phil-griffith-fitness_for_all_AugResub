@@ -40,7 +40,7 @@
         </form>       
 
     </div>
-    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="">
+    <a class="{% if grand_total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'basket' %}">
         <div class="text-center">
             <div><i class="fas fa-shopping-bag fa-lg"></i></div>
             <p class="my-0">
@@ -74,7 +74,7 @@
                         <p class="card-text">£{{ product.price}}</p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Last updated 3 mins ago</small>
+                        <a href="" class="btn">Add to basket</a>
                     </div>
                 </div>
             </div>
