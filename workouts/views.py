@@ -52,6 +52,18 @@ def workouts(request):
     return render(request, 'workouts/workouts.html', context)
 
 
+def workout(request, workout_id):
+    """ View to display workout video """
+
+    workout = get_object_or_404(Workouts, pk=workout_id)
+
+    context = {
+        'workout': workout,
+    }
+
+    return render(request, 'workouts/workout.html', context)
+
+
 
 
 

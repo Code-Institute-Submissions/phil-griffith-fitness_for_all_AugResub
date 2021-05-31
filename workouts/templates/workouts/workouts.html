@@ -15,10 +15,14 @@
                             
                             <div class="card-body">
                                 <h5 class="card-title">{{workout.name }}</h5>
-                                <iframe width="100%" height="50%"
+                                <!-- <iframe width="100%" height="50%"
                                     src="{{ workout.video_url }}" allow="fullscreen;">
-                                </iframe>
-                                <p class="card-text">{{ workout.description }}</p>
+                                </iframe> -->
+                                <div>
+                                    <a href="{% url 'workout' workout.id %}">
+                                        <img src="{{ workout.video_image.url }}" alt="" width="100%">
+                                    </a>
+                                </div>
                             </div>
                             <div class="card-footer">
                                 <a href="" class="btn">Button</a>

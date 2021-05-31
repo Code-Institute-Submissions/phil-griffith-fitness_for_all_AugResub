@@ -25,6 +25,7 @@ class Workouts(models.Model):
     name = models.CharField(max_length=254)
     description = models.TextField()
     video_url = models.URLField(max_length=1024, null=True, blank=True)
+    video_image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name

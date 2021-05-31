@@ -9,6 +9,7 @@ class WorkoutsAdmin(admin.ModelAdmin):
         'name',
         'category',
         'video_url',
+        'video_image',
     )
 
     ordering = ('name',)
