@@ -9,6 +9,7 @@ def basket_contents(request):
     basket_items = []
     total = 0
     product_count = 0
+    delivery = 0
     basket = request.session.get('basket', {})
 
     for item_id, item_data in basket.items():
@@ -32,9 +33,10 @@ def basket_contents(request):
                     'product': product,
                     'size': size,
                 })
+                
+    delivery = settings.STANDARD_DELIVERY_CHARGE
 
-        delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
-        grand_total = delivery + total
+    grand_total = delivery + total
 
     context = {
         'basket_items': basket_items,
