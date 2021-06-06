@@ -41,6 +41,16 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-6">
+            {% if request.user.is_authenticated %}  
+                {% if request.user.is_superuser %}
+                    <a href="{% url 'edit_product' product.id %}" class="btn">Edit</a>
+                    <a href="{% url 'delete_product' product.id %}" class="btn">Delete</a>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
         <form class="form" action="{% url 'add_to_basket' product.id %}" method="POST">
             {% csrf_token %}
             <div class="form-row">

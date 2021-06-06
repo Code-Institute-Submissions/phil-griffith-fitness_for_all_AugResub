@@ -79,9 +79,16 @@
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">£{{ product.price}}</p>
                     </div>
-                    <div class="card-footer">
-                        <a href="" class="btn">Add to basket</a>
-                    </div>
+                    
+                        {% if request.user.is_authenticated %}  
+                            {% if request.user.is_superuser %}
+                                <div class="card-footer">
+                                    <a href="{% url 'edit_product' product.id %}" class="btn">Edit</a>
+                                    <a href="{% url 'delete_product' product.id %}" class="btn">Delete</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    
                 </div>
             </div>
         {% endfor %}
