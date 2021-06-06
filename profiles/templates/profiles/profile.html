@@ -24,5 +24,22 @@
                 <hr>
             </div>
         </div>
-        {{ profile }}
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <h3>Shipping Address</h3>
+                <form enctype="multipart/form-data" action="{% url 'profile' %}" method="POST" id="profile-update-form">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button class="btn">Update profile</button>
+                    <span>{{ profile.profile_pic.url }}</span>
+                    <img src="{{ profile.profile_pic.url }}" alt="">
+                </form>
+            </div>
+            <div class="col-12 col-lg-6">
+                <h3>Order history</h3>
+                {{ orders }}
+               
+            </div>
+        </div>
+ 
 {% endblock %}
