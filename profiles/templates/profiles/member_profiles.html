@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="display-4 text-success">Member Profiles</h1>
+
+   
+    <div class="container">
+        {% for user in profiles %}
+            <div class="row member-profile p-4">
+                <div class="col-12 col-lg-6">
+                    {% if user.profile_pic %}
+                        <img src="{{ user.profile_pic.url }}" alt="Profile picture">
+                    {% else %}
+                        <img src="{{ MEDIA_URL }}noimage.png" alt="No image" height="200px">
+                    {% endif %}
+                </div>
+                <div class="col-12 col-lg-6">
+                    <span>Name:</span>
+                    {{ user.first_name }}
+                    {{ user.last_name }}
+
+                    <p>Age: {{ user.age }}</p>
+                    <h4>Fitness Goal</h4>
+                    <p>{{ user.goal }}</p>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>
+{% endblock %}

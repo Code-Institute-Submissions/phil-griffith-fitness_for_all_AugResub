@@ -33,3 +33,19 @@ def profile(request):
     }
 
     return render(request, template, context)
+
+
+@login_required
+def member_profiles(request):
+    """ Display the user's profile. """
+
+    profiles = UserProfile.objects.all()
+
+
+
+    template = 'profiles/member_profiles.html'
+    context = {
+        'profiles': profiles,
+    }
+
+    return render(request, template, context)
