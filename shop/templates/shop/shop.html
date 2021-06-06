@@ -37,7 +37,13 @@
                     <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
                 </select>
             </div>
-        </form>       
+        </form>
+        {% if request.user.is_authenticated %}
+            <span>SHOP ITEMS</span>       
+            {% if request.user.is_superuser %}
+                <a href="{% url 'add_product' %}" class="btn">Add Product</a>
+            {% endif %}
+        {% endif %}
 
     </div>
     <a class="{% if total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'basket' %}">

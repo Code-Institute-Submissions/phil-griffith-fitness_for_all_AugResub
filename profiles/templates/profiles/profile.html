@@ -32,7 +32,11 @@
                     {{ form|crispy }}
                     <button class="btn">Update profile</button>
                     <span>{{ profile.profile_pic.url }}</span>
-                    <img src="{{ profile.profile_pic.url }}" alt="">
+                        {% if profile.profile_pic %}
+                            <img src="{{ profile.profile_pic.url }}" alt="Profile picture">
+                        {% else %}
+                            <img src="{{ MEDIA_URL }}noimage.png" alt="No image">
+                        {% endif %}
                 </form>
             </div>
             <div class="col-12 col-lg-6">
