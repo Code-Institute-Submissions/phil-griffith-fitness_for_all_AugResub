@@ -1,7 +1,7 @@
 from django import forms
 from allauth.account.forms import SignupForm
 from .models import UserProfile
-
+from datetime import datetime, timedelta
 
 # Code taken from Code Institute Boutique Ado project
 
@@ -28,14 +28,14 @@ class UserProfileForm(forms.ModelForm):
             'last_name': 'Last Name',
             'age': 'Age',
             'default_phone_number': 'Phone Number',
-            'default_country': 'Country',
-            'default_postcode': 'Postal Code',
-            'default_town_or_city': 'Town or City',
             'default_street_address1': 'Street Address 1',
             'default_street_address2': 'Street Address 2',
+            'default_town_or_city': 'Town or City',
             'default_county': 'County',
+            'default_postcode': 'Postal Code',
+            'default_country': 'Country',
             'goal': 'Goal',
-            'profile_pic': 'Profile Pic'
+            'profile_pic': 'Profile Pic',
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
@@ -55,9 +55,11 @@ class UserProfileForm(forms.ModelForm):
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
+    daysadded = forms.IntegerField()
 
-    def signup(self, request, user):
+    def signup(self, request, user, profile):
         user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
+        user.username.last_name = self.cleaned_data['last_name']
+        user.username.daysadded = self.cleaned_data['daysadded']
         user.save()
         return user

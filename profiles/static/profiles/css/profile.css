@@ -1,0 +1,9 @@
+table tr {
+    height: 80px;
+}
+
+table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}

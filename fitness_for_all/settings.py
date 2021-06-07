@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,7 @@ SECRET_KEY = ('django-insecure-7u8hco&k=w@9qt&82'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['fitness-for-all.herokuapp.com', 'localhost']
 
 
 # Application definition
@@ -110,7 +111,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 
 ACCOUNT_FORMS = {
-'signup': 'profiles.forms.CustomSignupForm',
+    'signup': 'profiles.forms.CustomSignupForm',
 }
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -126,11 +127,15 @@ WSGI_APPLICATION = 'fitness_for_all.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    'default': dj_database_url.parse('postgres://kuweewugighnue:87eb87489fa6c375ec138d182e374dcee5b4f837e6effc391f91d1508a5a6bad@ec2-54-155-35-88.eu-west-1.compute.amazonaws.com:5432/d6n9dvtdu0hrmj')
 }
 
 

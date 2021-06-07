@@ -1,0 +1,93 @@
+  
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <hr>
+            <h2 class="logo-font mb-4">My Profile</h2>
+            <hr>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile' %}">Public Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active"  aria-current="page" href="{% url 'personal_details' %}">Full Profile</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'order_history' %}">Order History</a>
+            </li>
+        </ul>
+        
+        <h3 class="logo-font mb-4">Personal Details</h3>
+        <div class="card mb-8 my-auto">
+            <div class="row g-0">
+              <div class="col-md-4">
+                {% if profile.profile_pic %}
+                    <img class="p-5" src="{{ profile.profile_pic.url }}" alt="Profile picture">
+                {% else %}
+                    <img src="{{ MEDIA_URL }}noimage.png" alt="No image">
+                {% endif %}
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                    <table>
+                        <tr>
+                            <td>First Name</td><td>{{ profile.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name</td><td>{{ profile.last_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Age</td><td>{{ profile.age }}</td>
+                        </tr>
+                        <tr>
+                            <td>Phone Number</td><td>{{ profile.default_phone_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Street Address 1</td><td>{{ profile.default_street_address1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Street Address 2</td><td>{{ profile.default_street_address2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>Town or City</td><td>{{ profile.default_town_or_city }}</td>
+                        </tr>
+                        <tr>
+                            <td>County</td><td>{{ profile.default_county }}</td>
+                        </tr>
+                        <tr>
+                            <td>Post Code</td><td>{{ profile.default_postcode }}</td>
+                        </tr>
+                        <tr>
+                            <td>Country</td><td>{{ profile.default_country }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fitenss Goal</td><td>{{ profile.goal }}</td>
+                        </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+          </div> 
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <a href="{% url 'edit_profile' %}" class="btn">Edit Profile</a>
+            </div>
+        </div>
+ 
+{% endblock %}
