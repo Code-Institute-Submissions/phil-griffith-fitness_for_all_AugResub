@@ -41,7 +41,7 @@ class UserProfileForm(forms.ModelForm):
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
         
         for field in self.fields:
-            if field != 'default_country':
+            if field not in ('default_country', 'date_joined', 'membership_expiry_date'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
@@ -55,11 +55,9 @@ class UserProfileForm(forms.ModelForm):
 class CustomSignupForm(SignupForm):
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    daysadded = forms.IntegerField()
+    days_added = forms.IntegerField()
 
-    def signup(self, request, user, profile):
-        user.first_name = self.cleaned_data['first_name']
-        user.username.last_name = self.cleaned_data['last_name']
-        user.username.daysadded = self.cleaned_data['daysadded']
-        user.save()
-        return user
+    def signup(self, request, user):
+        profile, created = models.UserProfile.objects.get_or_create(user=user)
+        profile.days_added = self.cleaned_data['days_added']
+        profile.save()

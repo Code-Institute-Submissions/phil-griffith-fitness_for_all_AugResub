@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
+from django.contrib.auth import authenticate, login
 from .models import UserProfile
 from .forms import UserProfileForm
+from django.urls import reverse
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
 
 
 @login_required
@@ -92,10 +95,5 @@ def member_profiles(request):
 
     return render(request, template, context)
 
-    
-def login(request):
-    from django.contrib.auth import authenticate
-    user = authenticate(username='john', password='secret')
-    template_name = "/templates/allauth/login.html"
-    print(user)
-    return render(request, template_name)
+
+

@@ -3,6 +3,9 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from datetime import datetime, timedelta
+from allauth.account.signals import user_signed_up
+from allauth.account.auth_backends import AuthenticationBackend
+
 
 
 from django_countries.fields import CountryField
@@ -27,19 +30,31 @@ class UserProfile(models.Model):
     goal = models.CharField(max_length=200, null=True, blank=True)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
     date_joined = models.DateField(default=datetime.now)
+    days_added = models.IntegerField(blank=True, null=True)
     membership_expiry_date = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
 
     def save(self, *args, **kwargs):
-        if self.membership_expiry_date is None:
-                self.membership_expiry_date = self.date_joined + timedelta(days=365)
         super(UserProfile, self).save(*args, **kwargs)
         
 
 
-@receiver(post_save, sender=User)
-def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+    @receiver(user_signed_up)
+    def populate_profile(request, user, **kwargs):
+
+        profile = UserProfile()
+        membership_length = int(request.POST.get("days_added"))
+        profile.user = user
+        profile.first_name = user.first_name
+        profile.last_name = user.last_name
+        profile.days_added = membership_length
+        profile.membership_expiry_date = datetime.now() + timedelta(days=membership_length)
+
+        profile.save()   
+
+
+
+
+
