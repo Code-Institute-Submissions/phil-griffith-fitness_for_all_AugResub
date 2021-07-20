@@ -36,6 +36,7 @@ class UserProfileForm(forms.ModelForm):
             'default_country': 'Country',
             'goal': 'Goal',
             'profile_pic': 'Profile Pic',
+            'days_added': 'Days added',
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
@@ -58,6 +59,6 @@ class CustomSignupForm(SignupForm):
     days_added = forms.IntegerField()
 
     def signup(self, request, user):
-        profile, created = models.UserProfile.objects.get_or_create(user=user)
+        profile = models.UserProfile.objects.get_or_create(user=user)
         profile.days_added = self.cleaned_data['days_added']
         profile.save()

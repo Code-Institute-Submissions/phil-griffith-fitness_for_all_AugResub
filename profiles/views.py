@@ -7,6 +7,11 @@ from .forms import UserProfileForm
 from django.urls import reverse
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
+from allauth.account.views import SignupView
+from allauth.exceptions import ImmediateHttpResponse
+from allauth.account.utils import complete_signup
+from allauth.account import app_settings
+import json
 
 
 @login_required
@@ -96,4 +101,35 @@ def member_profiles(request):
     return render(request, template, context)
 
 
+class AccountSignupView(SignupView):
+    # Signup View extended
 
+    # change template's name and path
+    print("Testing 123")
+
+    def form_valid(self, form):
+        # By assigning the User to a property on the view, we allow subclasses
+        # of SignupView to access the newly created User instance
+        message = self.request.POST['message']
+        if message == "Hello":
+            self.user = form.save(self.request)
+            try:
+                print("Form is valid we can check for payment now...")                
+                return complete_signup(
+                    self.request,
+                    self.user,
+                    app_settings.EMAIL_VERIFICATION,
+                    self.get_success_url(),
+                )
+            except ImmediateHttpResponse as e:
+                print("Form is valid we can check for payment now...1")
+                return e.response
+        else:
+            form_data = {
+                'first_name': self.request.POST['first_name'],
+            }
+            print(form_data)
+            return redirect('account_signup_view')
+
+       
+account_signup_view = AccountSignupView.as_view()
