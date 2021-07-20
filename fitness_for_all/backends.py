@@ -14,16 +14,15 @@ class MyAuthenticationBackend(AuthenticationBackend):
 
         ret = self._authenticate_by_username(**credentials)   
         profile = get_object_or_404(UserProfile, user=user)
-        print(profile.days_added)
         
         # check if memebership expiry is after today
 
         if profile.membership_expiry_date > date.today():
-            print(profile.days_added)
+            profile.save()
             return ret
 
         else:
-            # If membership has expired, set account to inactive
+            # If membership has expired, set profile membership level to free
             ret.is_active = False
             return ret
 

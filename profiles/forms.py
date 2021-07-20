@@ -6,6 +6,7 @@ from datetime import datetime, timedelta
 # Code taken from Code Institute Boutique Ado project
 
 
+
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
@@ -36,7 +37,7 @@ class UserProfileForm(forms.ModelForm):
             'default_country': 'Country',
             'goal': 'Goal',
             'profile_pic': 'Profile Pic',
-            'days_added': 'Days added',
+            'membership_level_selected': 'Membership Level',
         }
 
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
@@ -54,11 +55,18 @@ class UserProfileForm(forms.ModelForm):
 
 # https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/
 class CustomSignupForm(SignupForm):
+
+    MEMBERSHIP_LEVEL_SELECTED = [
+        (0, 'Free'),
+        (30, 'Full - 30 days (£19.99)'),
+        (180, 'Full - 6 months (£99.99)'),
+        (365, 'Full - 1 year (£160)'),
+    ]
+
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    days_added = forms.IntegerField()
+    membership_level_selected = forms.ChoiceField(choices=(MEMBERSHIP_LEVEL_SELECTED),  label='Membership Level')
 
     def signup(self, request, user):
         profile = models.UserProfile.objects.get_or_create(user=user)
-        profile.days_added = self.cleaned_data['days_added']
         profile.save()
