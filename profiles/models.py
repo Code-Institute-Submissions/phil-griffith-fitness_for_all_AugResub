@@ -51,7 +51,6 @@ class UserProfile(models.Model):
         membership_length = int(request.POST.get("membership_level_selected"))
         profile.user = user
         profile.membership_level_selected = membership_length
-        profile.membership_level = membership_length
         profile.membership_expiry_date = datetime.now() + timedelta(days=membership_length)
 
 

@@ -106,7 +106,7 @@ def login_check(request):
     if profile.membership_fee_paid:
         return redirect('home')
     else:
-        return redirect('membership_checkout')
+        return redirect(reverse('membership_checkout'))
 
 
 

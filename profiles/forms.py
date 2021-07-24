@@ -43,7 +43,7 @@ class UserProfileForm(forms.ModelForm):
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
         
         for field in self.fields:
-            if field not in ('default_country', 'date_joined', 'membership_expiry_date'):
+            if field not in ('default_country', 'date_joined', 'membership_expiry_date', 'expired_full_member', 'membership_level', 'membership_fee_paid'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
