@@ -14,6 +14,7 @@ from allauth.account import app_settings
 import json
 
 
+
 @login_required
 def profile(request):
     """ Display the user's profile. """
@@ -99,6 +100,16 @@ def member_profiles(request):
     return render(request, template, context)
 
 
+def login_check(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    if profile.membership_fee_paid:
+        return redirect('home')
+    else:
+        return redirect('membership_checkout')
+
+
+
 class AccountSignupView(SignupView):
     # Signup View extended
 
@@ -130,3 +141,8 @@ class AccountSignupView(SignupView):
 
        
 account_signup_view = AccountSignupView.as_view()
+
+
+
+
+

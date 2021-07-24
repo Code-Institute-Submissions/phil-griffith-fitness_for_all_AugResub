@@ -1,13 +1,15 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from fitness_for_all.decorators import full_membership_check
 from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Workouts, Category
 from .forms import WorkoutsForm
 
 
-
+@login_required
+@full_membership_check
 def workouts(request):
     """ View to return workouts page """
 

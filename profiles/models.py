@@ -19,8 +19,6 @@ class UserProfile(models.Model):
     """
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=20, null=True, blank=True)
-    last_name = models.CharField(max_length=20, null=True, blank=True)
     age = models.CharField(max_length=3, null=True, blank=True)
     default_phone_number = models.CharField(max_length=20, null=True, blank=True)
     default_country = CountryField(blank_label='Country *', null=True, blank=True)
@@ -33,7 +31,10 @@ class UserProfile(models.Model):
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
     date_joined = models.DateField(default=datetime.now)
     membership_expiry_date = models.DateField(blank=True, null=True)
+    expired_full_member = models.BooleanField(default=False)
     membership_level_selected = models.IntegerField(default=0)
+    membership_level = models.IntegerField(default=0)
+    membership_fee_paid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
@@ -49,10 +50,10 @@ class UserProfile(models.Model):
         profile = UserProfile()
         membership_length = int(request.POST.get("membership_level_selected"))
         profile.user = user
-        profile.first_name = user.first_name
-        profile.last_name = user.last_name
         profile.membership_level_selected = membership_length
+        profile.membership_level = membership_length
         profile.membership_expiry_date = datetime.now() + timedelta(days=membership_length)
+
 
         profile.save()   
 
