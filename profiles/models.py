@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from datetime import datetime, timedelta
 from allauth.account.signals import user_signed_up
 from allauth.account.auth_backends import AuthenticationBackend
+from django.shortcuts import render, redirect, reverse, get_object_or_404
 
 
 
@@ -44,23 +45,22 @@ class UserProfile(models.Model):
         super(UserProfile, self).save(*args, **kwargs)
         
 
+    # @receiver(user_signed_up)
+    # def populate_profile(request, user, **kwargs):
 
-    @receiver(user_signed_up)
-    def populate_profile(request, user, **kwargs):
+    #     profile = get_object_or_404(UserProfile, user=request.user)
+    #     membership_length = int(request.POST.get("membership_level_selected"))
+    #     profile.user = user
+    #     profile.membership_level_selected = membership_length
+    #     if membership_length == 30:
+    #         profile.membership_fee_due = 19.99
+    #     elif membership_length == 180:
+    #         profile.membership_fee_due = 99.99
+    #     elif membership_length == 365:
+    #         profile.membership_fee_due = 159.99
+    #     profile.membership_expiry_date = datetime.now() + timedelta(days=membership_length)
 
-        profile = UserProfile()
-        membership_length = int(request.POST.get("membership_level_selected"))
-        profile.user = user
-        profile.membership_level_selected = membership_length
-        if membership_length == 30:
-            profile.membership_fee_due = 19.99
-        elif membership_length == 180:
-            profile.membership_fee_due = 99.99
-        elif membership_length == 365:
-            profile.membership_fee_due = 159.99
-        profile.membership_expiry_date = datetime.now() + timedelta(days=membership_length)
-
-        profile.save()   
+    #     profile.save()   
 
 
 @receiver(post_save, sender=User)

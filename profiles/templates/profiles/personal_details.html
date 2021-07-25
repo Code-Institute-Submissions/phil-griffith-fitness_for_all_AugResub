@@ -59,9 +59,9 @@
                         <tr>
                             <td>Membership Status</td>
                             {% if profile.membership_level == 0 %}
-                                <td>Free <a href="" class="btn btn-primary">Upgrade</a> </td>
+                                <td>Free <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upgrade</a> </td>
                             {% elif profile.expired_full_member %}
-                                <td>Free (expired) <a href="" class="btn btn-primary">Renew</a></td>
+                                <td>Free (expired) <a href="" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">Renew</a></td>
                             {% else %}
                                 <td>Full</td>
                             {% endif %}                            

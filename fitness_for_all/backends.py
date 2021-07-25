@@ -28,6 +28,7 @@ class MyAuthenticationBackend(AuthenticationBackend):
             if profile.membership_fee_due == 0:
                 print("Paid membership - Active")
                 profile.full_member = True
+                profile.expired_full_member = False
                 profile.save()
             else:
                 print("UnPaid membership - InActive")
@@ -36,6 +37,7 @@ class MyAuthenticationBackend(AuthenticationBackend):
             # If membership has expired set expired full member flag to true
             print("Paid membership - Expired")
             profile.expired_full_member = True
+            profile.full_member = False
             profile.save()
             return ret
 

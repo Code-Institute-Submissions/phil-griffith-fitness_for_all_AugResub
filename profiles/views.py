@@ -11,6 +11,7 @@ from allauth.account.views import SignupView
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.account.utils import complete_signup
 from allauth.account import app_settings
+from datetime import datetime, timedelta
 import json
 
 
@@ -141,6 +142,25 @@ class AccountSignupView(SignupView):
 
        
 account_signup_view = AccountSignupView.as_view()
+
+
+def update_membership(request):
+    profile = get_object_or_404(UserProfile, user=request.user)
+
+    membership_selected = int(request.POST['membership_type'])
+
+    if membership_selected == 30:
+        fee_due = 19.99
+    elif membership_selected == 180:
+        fee_due = 99.99
+    else:
+        fee_due = 159.99
+    profile.membership_fee_due = fee_due
+    profile.membership_expiry_date = datetime.now() + timedelta(days=membership_selected)
+    profile.membership_level_selected = membership_selected
+    profile.save()
+    return redirect(reverse('login_check'))
+
 
 
 
