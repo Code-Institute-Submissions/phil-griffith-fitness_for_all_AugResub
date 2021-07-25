@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .forms import MemberBlogForm
+from .models import MemberBlog
 from django.contrib import messages
 
 # Create your views here.
@@ -7,7 +8,15 @@ from django.contrib import messages
 def member_blog(request):
     """ Add a blog  """
 
-    return render(request, 'member_blog/member_blog.html')
+    member_blogs = MemberBlog.objects.all()
+
+    template = 'member_blog/member_blog.html'
+    context = {
+        'member_blogs': member_blogs,
+    }
+
+    return render(request, template, context)
+
 
 
 def add_blog(request):

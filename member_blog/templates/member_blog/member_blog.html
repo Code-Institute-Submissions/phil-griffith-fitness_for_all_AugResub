@@ -1,12 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'member_blog/css/member_blog.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1 class="display-4 text-success">Member Blog</h1>
 
    
     <div class="container">
+        <div class="col-10">
+            <div class="card member-blog">
+                {% for blog in member_blogs %}
+                <div class="row p-4">
+                    <div class="col-12">
+                        <span>User:</span>
+                        {{ blog.user}}
+    
+                        <p>Date: {{ blog.date }}</p>
+                        <h4>{{ blog.title }}</h4>
+                        <p>{{ blog.comment }}</p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+            </div>
+
+        </div>
+
+        <div>
         <a href="{% url 'add_blog' %}">Add Blog</a>
-        
+        </div>
     </div>
 {% endblock %}
