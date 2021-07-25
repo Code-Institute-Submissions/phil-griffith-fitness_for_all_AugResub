@@ -41,12 +41,17 @@
                 {% else %}
                     <img src="{{ MEDIA_URL }}noimage.png" alt="No image">
                 {% endif %}
+
+                  
               </div>
               <div class="col-md-8">
                 <div class="card-body">
                   <h5 class="card-title">{{ profile.first_name }} {{ profile.last_name }}</h5>
                   <p class="card-text">Age: {{ profile.age }}</p>
                   <p class="card-text">Fitness Goal: {{ profile.goal }}</p>
+                  {% if profile.membership_fee_due == 0 %}
+                    <p class="card-text">Membership Expiry: {{ profile.membership_expiry_date }}</p>
+                  {% endif %}
                 </div>
               </div>
             </div>

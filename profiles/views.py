@@ -103,7 +103,7 @@ def member_profiles(request):
 def login_check(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
-    if profile.membership_fee_paid:
+    if profile.membership_fee_due == 0:
         return redirect('home')
     else:
         return redirect(reverse('membership_checkout'))

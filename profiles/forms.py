@@ -16,8 +16,7 @@ class UserProfileForm(forms.ModelForm):
         widgets = {
             'goal': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
         }
-        
-
+ 
     def __init__(self, *args, **kwargs):
         """
         Add placeholders and classes, remove auto-generated
@@ -25,8 +24,6 @@ class UserProfileForm(forms.ModelForm):
         """
         super().__init__(*args, **kwargs)
         placeholders = {
-            'first_name': 'First Name',
-            'last_name': 'Last Name',
             'age': 'Age',
             'default_phone_number': 'Phone Number',
             'default_street_address1': 'Street Address 1',
@@ -43,7 +40,7 @@ class UserProfileForm(forms.ModelForm):
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
         
         for field in self.fields:
-            if field not in ('default_country', 'date_joined', 'membership_expiry_date', 'expired_full_member', 'membership_level', 'membership_fee_paid'):
+            if field not in ('default_country', 'date_joined', 'membership_expiry_date', 'expired_full_member', 'membership_level', 'membership_fee_due'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
@@ -60,7 +57,7 @@ class CustomSignupForm(SignupForm):
         (0, 'Free'),
         (30, 'Full - 30 days (£19.99)'),
         (180, 'Full - 6 months (£99.99)'),
-        (365, 'Full - 1 year (£160)'),
+        (365, 'Full - 1 year (£159.99)'),
     ]
 
     first_name = forms.CharField(max_length=30, label='First Name')

@@ -55,6 +55,20 @@
                         <tr>
                             <td>Age</td><td>{{ profile.age }}</td>
                         </tr>
+
+                        <tr>
+                            <td>Membership Status</td>
+                            {% if profile.membership_level == 0 %}
+                                <td>Free <a href="" class="btn btn-primary">Upgrade</a> </td>
+                            {% elif profile.expired_full_member %}
+                                <td>Free (expired) <a href="" class="btn btn-primary">Renew</a></td>
+                            {% else %}
+                                <td>Full</td>
+                            {% endif %}                            
+                        </tr>
+                        <tr>
+                            <td>Membership Expiry date</td><td>{{ profile.membership_expiry_date }}</td>
+                        </tr>
                         <tr>
                             <td>Phone Number</td><td>{{ profile.default_phone_number }}</td>
                         </tr>
@@ -79,9 +93,7 @@
                         <tr>
                             <td>Fitenss Goal</td><td>{{ profile.goal }}</td>
                         </tr>
-                        <tr>
-                            <td>Membership Expiry date</td><td>{{ profile.membership_expiry_date }}</td>
-                        </tr>
+                        
                     </table>
                 </div>
               </div>

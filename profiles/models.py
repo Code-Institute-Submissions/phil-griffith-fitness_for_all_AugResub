@@ -29,12 +29,13 @@ class UserProfile(models.Model):
     default_county = models.CharField(max_length=80, null=True, blank=True)
     goal = models.CharField(max_length=200, null=True, blank=True)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True, null=True)
-    date_joined = models.DateField(default=datetime.now)
+    date_joined = models.DateField(blank=True, default=datetime.now)
     membership_expiry_date = models.DateField(blank=True, null=True)
-    expired_full_member = models.BooleanField(default=False)
-    membership_level_selected = models.IntegerField(default=0)
-    membership_level = models.IntegerField(default=0)
-    membership_fee_paid = models.BooleanField(default=False)
+    full_member = models.BooleanField(blank=True, default=False)
+    expired_full_member = models.BooleanField(blank=True, default=False)
+    membership_level_selected = models.IntegerField(blank=True, default=0)
+    membership_level = models.IntegerField(blank=True, default=0)
+    membership_fee_due = models.IntegerField(blank=True, default=0)
 
     def __str__(self):
         return self.user.username
@@ -51,10 +52,26 @@ class UserProfile(models.Model):
         membership_length = int(request.POST.get("membership_level_selected"))
         profile.user = user
         profile.membership_level_selected = membership_length
+        if membership_length == 30:
+            profile.membership_fee_due = 19.99
+        elif membership_length == 180:
+            profile.membership_fee_due = 99.99
+        elif membership_length == 365:
+            profile.membership_fee_due = 159.99
         profile.membership_expiry_date = datetime.now() + timedelta(days=membership_length)
 
-
         profile.save()   
+
+
+@receiver(post_save, sender=User)
+def create_or_update_user_profile(sender, instance, created, **kwargs):
+    """
+    Create or update the user profile
+    """
+    if created:
+        UserProfile.objects.create(user=instance)
+    # Existing users: just save the profile
+    instance.userprofile.save()
 
 
 

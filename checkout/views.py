@@ -144,6 +144,7 @@ def checkout_success(request, order_number):
     Handle successful checkouts
     """
     save_info = request.session.get('save_info')
+    print(save_info)
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
@@ -154,18 +155,18 @@ def checkout_success(request, order_number):
 
         # Save the user's info
         if save_info:
-            profile_data = {
-                'default_phone_number': order.phone_number,
-                'default_country': order.country,
-                'default_postcode': order.postcode,
-                'default_town_or_city': order.town_or_city,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
-            }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+            print("User chose to save info")
+            print(profile.user)
+
+            profile.default_phone_number = order.phone_number
+            profile.default_country = order.country
+            profile.default_postcode = order.postcode
+            profile.default_town_or_city = order.town_or_city
+            profile.default_street_address1 = order.street_address1
+            profile.default_street_address2 = order.street_address2
+            profile.default_county = order.county
+
+            profile.save()
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
@@ -242,19 +243,17 @@ def membership_checkout(request):
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     else:
-    #     # basket = request.session.get('basket', {})
-    #     if not basket:
-    #         messages.error(request, "There's nothing in your basket at the moment")
-    #         return redirect(reverse('products'))
+        if request.user.is_authenticated:
+            profile = UserProfile.objects.get(user=request.user)
+            total = profile.membership_fee_due
+            stripe_total = round(total * 100)
+            stripe.api_key = stripe_secret_key
+            intent = stripe.PaymentIntent.create(
+                amount=stripe_total,
+                currency=settings.STRIPE_CURRENCY,
+            )
 
-        # current_basket = basket_contents(request)
-        total = 20
-        stripe_total = round(total * 100)
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
+        
 
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
@@ -303,25 +302,22 @@ def membership_checkout_success(request, order_number):
         order.user_profile = profile
         order.save()
 
-        # set membership fee to paid
-        profile.membership_fee_paid = True
+        # set membership fee to paid & activate selected membership
+        profile.membership_fee_due = 0
         profile.membership_level = profile.membership_level_selected
         profile.save()
 
         # Save the user's info
         if save_info:
-            profile_data = {
-                'default_phone_number': order.phone_number,
-                'default_country': order.country,
-                'default_postcode': order.postcode,
-                'default_town_or_city': order.town_or_city,
-                'default_street_address1': order.street_address1,
-                'default_street_address2': order.street_address2,
-                'default_county': order.county,
-            }
-            user_profile_form = UserProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+            profile.default_phone_number = order.phone_number
+            profile.default_country = order.country
+            profile.default_postcode = order.postcode
+            profile.default_town_or_city = order.town_or_city
+            profile.default_street_address1 = order.street_address1
+            profile.default_street_address2 = order.street_address2
+            profile.default_county = order.county
+
+            profile.save()
 
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
@@ -330,7 +326,7 @@ def membership_checkout_success(request, order_number):
     if 'basket' in request.session:
         del request.session['basket']
 
-    template = 'checkout/checkout_success.html'
+    template = 'checkout/membership_checkout_success.html'
     context = {
         'order': order,
     }

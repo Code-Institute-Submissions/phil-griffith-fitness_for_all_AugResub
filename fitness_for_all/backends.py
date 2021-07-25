@@ -15,23 +15,26 @@ class MyAuthenticationBackend(AuthenticationBackend):
         ret = self._authenticate_by_username(**credentials)   
         profile = get_object_or_404(UserProfile, user=user)
         
-        # check if memebership expiry is after today
+        # check if memebership status 
 
+        # check for free user
         if profile.membership_level == 0:
             print("Free user, never paid for Full membership")
             return ret
 
+        # check for full member
         elif profile.membership_expiry_date > date.today():
-            if profile.membership_fee_paid:
+            # check if payment has been made
+            if profile.membership_fee_due == 0:
                 print("Paid membership - Active")
+                profile.full_member = True
                 profile.save()
             else:
                 print("UnPaid membership - InActive")
                 return ret
         else:
-            # If membership has expired, set profile membership level to free
+            # If membership has expired set expired full member flag to true
             print("Paid membership - Expired")
-            profile.membership_level = 0
             profile.expired_full_member = True
             profile.save()
             return ret
