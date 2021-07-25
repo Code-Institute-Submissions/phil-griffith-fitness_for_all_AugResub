@@ -122,8 +122,7 @@ class AccountSignupView(SignupView):
         # of SignupView to access the newly created User instance
 
         self.user = form.save(self.request)
-        try:
-            print("Form is valid we can check for payment now...")                
+        try:          
             return complete_signup(
                 self.request,
                 self.user,
@@ -131,7 +130,6 @@ class AccountSignupView(SignupView):
                 self.get_success_url(),
             )
         except ImmediateHttpResponse as e:
-            print("Form is valid we can check for payment now...1")
             return e.response
 
         form_data = {

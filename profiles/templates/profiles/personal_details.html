@@ -67,7 +67,12 @@
                             {% endif %}                            
                         </tr>
                         <tr>
-                            <td>Membership Expiry date</td><td>{{ profile.membership_expiry_date }}</td>
+                            <td>Membership Expiry date</td>
+                            {% if profile.user|lower == 'ffa_admin' %}
+                                <td>Never</td>
+                            {% else %}
+                                <td>{{ profile.membership_expiry_date }}{{ profile.user }}</td>
+                            {% endif %}
                         </tr>
                         <tr>
                             <td>Phone Number</td><td>{{ profile.default_phone_number }}</td>

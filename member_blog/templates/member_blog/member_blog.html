@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <h1 class="display-4 text-success">Member Blog</h1>
+
+   
+    <div class="container">
+        <a href="{% url 'add_blog' %}">Add Blog</a>
+        
+    </div>
+{% endblock %}

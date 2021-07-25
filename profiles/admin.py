@@ -9,4 +9,4 @@ class UserProfileAdmin(admin.ModelAdmin):
         'user',
         'profile_pic',
     )
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, UserProfileAdmin)
