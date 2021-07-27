@@ -84,6 +84,16 @@ def checkout(request):
                     order.delete()
                     return redirect(reverse('view_basket'))
 
+                # Check for full member and apply discount
+            if request.user.is_authenticated:
+                profile = UserProfile.objects.get(user=request.user)
+                print(profile)
+                if profile.full_member:
+                    order.discount = order.order_total / 10
+                    order.order_total = order.order_total - order.discount
+                    order.grand_total = order.grand_total - order.discount
+                    order.save()
+
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
@@ -95,6 +105,7 @@ def checkout(request):
         if not basket:
             messages.error(request, "There's nothing in your basket at the moment")
             return redirect(reverse('products'))
+
 
         current_basket = basket_contents(request)
         total = current_basket['grand_total']
@@ -134,6 +145,7 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+
     }
 
     return render(request, template, context)
@@ -207,34 +219,8 @@ def membership_checkout(request):
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
-            # order.original_basket = json.dumps(basket)
             order.save()
-            # for item_id, item_data in basket.items():
-            # try:
-            #     product = Product.objects.get(id=item_id)
-            #     if isinstance(item_data, int):
-            #         order_line_item = OrderLineItem(
-            #             order=order,
-            #             product=product,
-            #             quantity=item_data,
-            #         )
-            #         order_line_item.save()
-            #     else:
-            #         # for size, quantity in item_data['items_by_size'].items():
-            #         order_line_item = OrderLineItem(
-            #             order=order,
-            #             product=product,
-            #             quantity=quantity,
-            #             product_size=size,
-            #         )
-            #         order_line_item.save()
-            # except Product.DoesNotExist:
-            #     messages.error(request, (
-            #         "One of the products in your basket wasn't found in our database. "
-            #         "Please call us for assistance!")
-            #     )
-            #     order.delete()
-            #     return redirect(reverse('view_basket'))
+
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
@@ -251,9 +237,7 @@ def membership_checkout(request):
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
                 currency=settings.STRIPE_CURRENCY,
-            )
-
-        
+            )        
 
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:

@@ -38,11 +38,14 @@ def add_blog(request):
                 'user': user,
             })
         else:
-            form = MemberBlogForm()
+            form = MemberBlogForm()             
+
+    member_blogs = MemberBlog.objects.all()
         
     template = 'member_blog/add_blog.html'
     context = {
         'form': form,
+        'member_blogs': member_blogs,
     }
 
     return render(request, template, context)

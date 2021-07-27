@@ -27,6 +27,7 @@ class Order(models.Model):
     county = models.CharField(max_length=80, null=True, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     delivery_cost = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
+    discount = models.DecimalField(max_digits=6, decimal_places=2, null=False, default=0)
     order_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
     original_basket = models.TextField(null=False, blank=False, default='')
@@ -45,11 +46,9 @@ class Order(models.Model):
         """
         self.order_total = self.lineitems.aggregate(Sum('lineitem_total'))['lineitem_total__sum'] or 0
 
-    # ADD LOGIC FOR MEMBER DISCOUNT.............
-
         self.delivery_cost = settings.STANDARD_DELIVERY_CHARGE
 
-        self.grand_total = self.order_total + self.delivery_cost
+        self.grand_total = self.order_total + self.delivery_cost - self.discount
         self.save()
 
     def save(self, *args, **kwargs):

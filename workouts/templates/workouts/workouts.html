@@ -6,6 +6,16 @@
     <h1 class="display-4 text-success text-center">Workouts</h1>
 
     <div class="row">
+        <div class="col-2">
+            <select name="category_list" id="category_list">
+                <option value="reset" {% if category == 'all_workouts' %}selected{% endif %}>All Workouts</option>   
+                <option value="strength" {% if category == 'strength' %}selected{% endif %}>Stength</option>
+                <option value="cardio" {% if category == 'cardio' %}selected{% endif %}>Cardio</option>
+                <option value="toning" {% if category == 'toning' %}selected{% endif %}>Toning</option>
+                <option value="hiit" {% if category == 'hiit' %}selected{% endif %}>HIIT</option>                        
+            </select>
+            <a class="btn" href="{% url 'workouts' %}">RESET</a>
+        </div>
         <div class="row">
             <div class="card-deck m-auto">
                 {% for workout in workouts %}

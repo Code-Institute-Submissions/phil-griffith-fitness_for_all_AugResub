@@ -3,5 +3,15 @@ body {
 }
 
 .member-blog {
-    max-height: 300px;
+    max-height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+#id_user {
+    visibility: hidden;
+}
+
+#add-blog-form {
+    margin: auto;
 }
