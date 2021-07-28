@@ -36,7 +36,7 @@ class UserProfile(models.Model):
     expired_full_member = models.BooleanField(blank=True, default=False)
     membership_level_selected = models.IntegerField(blank=True, default=0)
     membership_level = models.IntegerField(blank=True, default=0)
-    membership_fee_due = models.IntegerField(blank=True, default=0)
+    membership_fee_due = models.FloatField(blank=True, default=0)
 
     def __str__(self):
         return self.user.username

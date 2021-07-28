@@ -57,8 +57,18 @@
                                             {% if item.product.has_sizes %}
                                                 Size {{ item.product.size|upper }}
                                             {% endif %}{{ item.product.name }} x{{ item.quantity }}
-                                        </li>
+                                         </li>
                                     {% endfor %}
+                                    {% if order.grand_total == 19.99 and order.order_total == 19.99 %}
+                                        30 days Membership
+                                    {% endif %}
+                                    {% if order.grand_total == 99.99 and order.order_total == 99.99 %}
+                                       6 Months Membership
+                                    {% endif %}
+                                    {% if order.grand_total == 159.99 and order.order_total == 159.99 %}
+                                        1 years Membership
+                                    {% endif %}
+                                    
                                 </ul>
                             </td>
                             <td>${{ order.grand_total }}</td>

@@ -10,4 +10,5 @@ urlpatterns = [
     path('membership_checkout', views.membership_checkout, name='membership_checkout'),
     path('membership_checkout', views.membership_checkout, name=''),
     path('membership_checkout_success/<order_number>', views.membership_checkout_success, name='membership_checkout_success'),
+    path('cancel_membership_purchase', views.cancel_membership_purchase, name='cancel_membership_purchase'),    
 ]

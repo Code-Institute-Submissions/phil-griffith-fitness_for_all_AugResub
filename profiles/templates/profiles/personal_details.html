@@ -47,7 +47,7 @@
                 <div class="card-body">
                     <table>
                         <tr>
-                            <td>First Name</td><td>{{ user.first_name }}</td>
+                            <td>First Name</td><td>{{ profile.user.first_name }}</td>
                         </tr>
                         <tr>
                             <td>Last Name</td><td>{{ user.last_name }}</td>
@@ -59,9 +59,9 @@
                         <tr>
                             <td>Membership Status</td>
                             {% if profile.membership_level == 0 %}
-                                <td>Free <a href="" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Upgrade</a> </td>
+                                <td>Free <a href="" class="btn btn-primary" data-toggle="modal" data-target="#upgrade_member_modal">Upgrade</a> </td>
                             {% elif profile.expired_full_member %}
-                                <td>Free (expired) <a href="" class="btn btn-primary " data-toggle="modal" data-target="#exampleModal">Renew</a></td>
+                                <td>Free (expired) <a href="" class="btn btn-primary " data-toggle="modal" data-target="#renew_member_modal">Renew</a></td>
                             {% else %}
                                 <td>Full</td>
                             {% endif %}                            

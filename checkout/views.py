@@ -200,7 +200,6 @@ def membership_checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        # basket = request.session.get('basket', {})
 
         form_data = {
             'full_name': request.POST['full_name'],
@@ -215,10 +214,13 @@ def membership_checkout(request):
         }
 
         order_form = OrderForm(form_data)
+        profile = UserProfile.objects.get(user=request.user)
         if order_form.is_valid():
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
+            order.order_total = profile.membership_fee_due
+            order.grand_total = profile.membership_fee_due
             order.save()
 
 
@@ -263,11 +265,24 @@ def membership_checkout(request):
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
+
     template = 'checkout/membership_checkout.html'
+    profile = UserProfile.objects.get(user=request.user)
+
+    if profile.membership_fee_due == 19.99:
+        item = "30 days Membership"
+    elif profile.membership_fee_due == 99.99:
+        item = "6 Months Membership"
+    else:
+        item = "1 years Membership"
+
+
     context = {
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+        'profile': profile,
+        'item': item,
     }
 
     return render(request, template, context)
@@ -289,6 +304,7 @@ def membership_checkout_success(request, order_number):
         # set membership fee to paid & activate selected membership
         profile.membership_fee_due = 0
         profile.membership_level = profile.membership_level_selected
+        profile.membership_expiry_date = datetime.now() + timedelta(days=membership_selected)
         profile.full_member = True
         profile.expired_full_member = False
         profile.save()
@@ -318,3 +334,13 @@ def membership_checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+
+
+def cancel_membership_purchase(request):
+    profile = UserProfile.objects.get(user=request.user)
+    profile.membership_fee_due = 0
+    profile.membership_level_selected = 0
+    profile.save()
+
+    return redirect('personal_details')
+

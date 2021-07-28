@@ -19,14 +19,15 @@
 
         <div class="row">
             <div class="col-12 col-lg-6 mb-5">
-                <p class="text-muted">Order Summary ()</p>
+                <p class="text-muted">Order Summary</p>
                 <div class="row">
                     <div class="col-7 offset-2">
-                        <p class="mb-1 mt-0 small text-muted"></p>
+                        <p class="mb-1 mt-0 small text-muted">{{ item }}</p>
                     </div>
                     <div class="col-3 text-right">
                         <p class="mb-1 mt-0 small text-muted"></p>
                     </div>
+
                 </div>
 
                 <div class="row">
@@ -39,14 +40,7 @@
                             {% endif %}
                         </a>
                     </div>
-                    <div class="col-7">
-                        <p class="my-0"><strong></strong></p>
-                        <p class="my-0 small">Size: </p>
-                        <p class="my-0 small text-muted">Qty: </p>
-                    </div>
-                    <div class="col-3 text-right">
-                        <p class="my-0 small text-muted">$</p>
-                    </div>
+
                 </div>
 
                 <hr class="my-0">
@@ -57,9 +51,9 @@
                         <p class="my-0">Grand Total</p>
                     </div>
                     <div class="col-3">
-                        <p class="my-0">$15</p>
-                        <p class="my-0">$5</p>
-                        <p class="my-0"><strong>$20</strong></p>
+                        <p class="my-0">${{ profile.membership_fee_due }}</p>
+                        <p class="my-0">$0</p>
+                        <p class="my-0"><strong>${{ profile.membership_fee_due }}</strong></p>
                     </div>
                 </div>
             </div>
@@ -104,12 +98,14 @@
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
 
-                    <div class="submit-button text-right mt-5 mb-2">
-                        <a href="{% url 'basket' %}" class="btn btn-outline-black rounded-0">
+
+
+                    <div class="submit-button text-right mt-5 mb-2">                         
+                        <a href="" class="btn btn-black rounded-0" id="cancel-button" data-toggle="modal" data-target="#cancel_membership_modal">
+                            <span class="font-weight-bold">Cancel</span>
                             <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
+                                <i class="fas fa-lock"></i>
                             </span>
-                            <span class="font-weight-bold">Adjust Basket</span>
                         </a>
                         <button class="btn btn-black rounded-0" id="submit-button">
                             <span class="font-weight-bold">Complete Order</span>
@@ -121,7 +117,7 @@
                             <span class="icon">
                                 <i class="fas fa-exclamation-circle"></i>
                             </span>
-                            <span>Your card will be charged <strong>$20</strong></span>
+                            <span>Your card will be charged <strong>${{ profile.membership_fee_due }}</strong></span>
                         </p>
                     </div>
                 </form>
@@ -135,6 +131,33 @@
             </span>
         </h1>
     </div>
+
+     <!-- cancel membership Modal -->
+     <div class="modal fade" id="cancel_membership_modal" tabindex="-1" role="dialog" aria-labelledby="cancel_membership_modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cancel_membership_modalLabel">Cancel Membership</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form action="{% url 'update_membership' %}" method="POST" id="update_membership-form">
+            {% csrf_token %}
+            <div class="modal-body">
+              <div class="membership-modal">
+                <p>Are you sure you want to cancel your membership purchase?</p>
+              </div>
+            </div>
+            <div class="modal-footer">
+               {{order.order_number}}
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              <a href="{% url 'cancel_membership_purchase'  %}" type="submit" class="btn btn-primary">Yes</a>
+            </div>
+          </form>
+          </div>
+        </div>
+      </div>
 
 {% endblock %}
 
