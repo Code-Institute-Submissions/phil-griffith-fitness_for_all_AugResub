@@ -1,5 +1,13 @@
 body {
     background-color: rgb(240, 245, 245);
+    font-family: 'Gruppo', cursive;
+    margin-bottom: 60px;
+}
+
+.navbar, footer {
+    background-color: rgb(212, 233, 231);
+    color: black;
+    font-weight: 700;
 }
 
 .btt-link,
@@ -13,7 +21,7 @@ body {
 
 .message-container {
     position: fixed;
-    top: 72px;
+    bottom: 72px;
     right: 15px;
     z-index: 99999999999;
 }
@@ -24,4 +32,16 @@ body {
 
 .toast-capper {
     height: 2px;
+}
+
+
+a i {
+    padding: 15px;;
+}
+
+.page-footer {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+	z-index: 2;
 }

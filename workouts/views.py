@@ -124,16 +124,21 @@ def edit_workout(request, workout_id):
 
 
 @login_required
-def delete_workout(request, workout_id):
+def delete_workout(request):
     """ Delete a workout  """
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site owners can do that.')
         return redirect(reverse('workouts'))
         
+    workout_id = (request.POST['workout_id'])
     workout = get_object_or_404(Workouts, pk=workout_id)
     workout.delete()
     messages.success(request, 'Workout deleted!')
     return redirect(reverse('workouts'))
+
+    
+    
+
 
 
 

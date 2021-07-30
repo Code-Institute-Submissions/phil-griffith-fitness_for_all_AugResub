@@ -1,16 +1,18 @@
 {%  extends "base.html" %}
 {% load static %}
 
-{% block content %}
-<div class="container h-100">
-    <div class="row h-100">
-        <h1 class="display-4 text-success">Shop</h1>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'shop/css/shop.css' %}">
+{% endblock %}
 
-    
+
+{% block content %}
+<div class="container h-100" >
+    <div class="row h-100">   
 
     </div>
     <a class="{% if total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'basket' %}">
-        <div class="text-center">
+        <div class="text-right">
             <div><i class="fas fa-shopping-bag fa-lg"></i></div>
             <p class="my-0">
                 {% if total %}
@@ -23,12 +25,12 @@
     </a>
 </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-6">
+<div class="container" id="prod_details">
+    <div class="row" id="product_detail">
+        <div class="col-sm-12 col-md-6">
             {% if product.image %}
                 <a href="{{ product.image.url }}" target="_blank">
-                    <img class="card-img-top h-100" src="{{ product.image.url }}" alt="{{ product.name }}" height="322px">
+                    <img class="card-img-top h-100" src="{{ product.image.url }}" alt="{{ product.name }}" widtch="100%">
                 </a>
             {% else %}
                 <a href="">
@@ -36,16 +38,18 @@
                 </a>
             {% endif %}
         </div>
-        <div class="col-6">
+        <div class="col-sm-12 col-md-6">
             <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
             {% if request.user.is_authenticated %}  
                 {% if request.user.is_superuser %}
-                    <a href="{% url 'edit_product' product.id %}" class="btn">Edit</a>
-                    <a href="{% url 'delete_product' product.id %}" class="btn">Delete</a>
+                    <a href="{% url 'edit_product' product.id %}" class="btn btn-secondary">Edit</a>
+                    <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}">
+                    <button class="del_prod btn btn-danger" type="submit"  data-toggle="modal" data-target="#delete_product_modal" data_prod>Delete</button>
                 {% endif %}
             {% endif %}
         </div>
@@ -84,7 +88,6 @@
                         <span class="text-uppercase">Back to Shop</span>
                     </a>
                     <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Basket">
-                    <span>{{ request.path }}</span>
                 </div>
                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 {% endwith %}
@@ -92,8 +95,4 @@
         </form>
     </div>
 </div>
-
-
-
-
 {% endblock %}

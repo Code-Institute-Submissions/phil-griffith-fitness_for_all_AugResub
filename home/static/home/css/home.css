@@ -1,0 +1,33 @@
+body {
+    height: 100%;
+    background-color: teal;
+    color: #fff;
+}
+
+.home-page-1 {
+    z-index: 10;
+    background-image: url("/media/home.jpg");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin-top: 20px;
+    margin-left: -50px;
+    margin-right: -50px;
+}
+
+.home-page-2 {
+    font-size: 24px;
+}
+
+table td {
+    margin: 20px;
+    padding: 20px;
+}
+
+.hero-content {
+    margin-top: 450px;
+    font-size: 42px;
+    margin-bottom: 150px;
+}

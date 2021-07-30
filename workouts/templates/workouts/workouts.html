@@ -1,21 +1,36 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'shop/css/shop.css' %}">
+{% endblock %}
+
 {% block content %}
 <div class="container-fluid">
     <h1 class="display-4 text-success text-center">Workouts</h1>
 
-    <div class="row">
-        <div class="col-2">
-            <select name="category_list" id="category_list">
+    <div class="row m-3">
+        <div class="col-sm-12 col-md-2 m-2">
+            <select name="category_list" id="category_list" class="p-2">
                 <option value="reset" {% if category == 'all_workouts' %}selected{% endif %}>All Workouts</option>   
                 <option value="strength" {% if category == 'strength' %}selected{% endif %}>Stength</option>
                 <option value="cardio" {% if category == 'cardio' %}selected{% endif %}>Cardio</option>
                 <option value="toning" {% if category == 'toning' %}selected{% endif %}>Toning</option>
                 <option value="hiit" {% if category == 'hiit' %}selected{% endif %}>HIIT</option>                        
             </select>
-            <a class="btn" href="{% url 'workouts' %}">RESET</a>
+            
         </div>
+        <div class="col-sm-12 col-md-2 m-2">
+            <a class="btn btn-secondary" href="{% url 'workouts' %}">RESET</a>
+        </div>
+        <div class="col-sm-12 col-md-3 m-2">
+            {% if request.user.is_authenticated %}   
+            {% if request.user.is_superuser %}
+                <a href="{% url 'add_workout' %}" class="btn btn-success" id="add_workout">Add Workout</a>
+            {% endif %}
+        {% endif %}
+        </div>
+    </div> 
         <div class="row">
             <div class="card-deck m-auto">
                 {% for workout in workouts %}
@@ -25,15 +40,21 @@
                             
                             <div class="card-body">
                                 <h5 class="card-title">{{workout.name }}</h5>
-                                <!-- <iframe width="100%" height="50%"
-                                    src="{{ workout.video_url }}" allow="fullscreen;">
-                                </iframe> -->
                                 <div>
                                     <a href="{% url 'workout' workout.id %}">
                                         <img src="{{ workout.video_image.url }}" alt="" width="100%">
                                     </a>
                                 </div>
                             </div>
+                            {% if request.user.is_authenticated %}  
+                            {% if request.user.is_superuser %}
+                                <div class="card-footer">
+                                    <a href="{% url 'edit_workout' workout.id %}" class="btn btn-secondary">Edit</a>
+                                    <input type="hidden" id="workout_id" name="workout_id" value="{{ workout.id }}">
+                                    <button class="del_workout btn btn-danger" type="submit"  data-toggle="modal" data-target="#delete_workout_modal" data_prod>Delete</button>
+                                </div>
+                            {% endif %}
+                        {% endif %}     
                         </div>
                     </div>
                 {% endfor %}
@@ -41,5 +62,10 @@
         </div>
     </div>
 
-</div>
+
+{% endblock %}
+
+{% block postload_js %}
+    {{ block.super }}
+    <script src="{% static 'workouts/js/workouts.js' %}"></script>
 {% endblock %}

@@ -1,35 +1,42 @@
 {%  extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'shop/css/shop.css' %}">
+{% endblock %}
+
+
+
 {% block content %}
 <div class="container h-100">
     <div class="row h-100">
-        <h1 class="display-4 text-success">Shop</h1>
 
         <form method="GET" action="{% url 'shop' %}">
-            <div class="row input-group w-100">
+            <div class="row input-group w-100 m-2">
                 {% if search_term %}
-                    <input class="col-6 form-control border border-black rounded-0" type="text" name="q" value="{{ search_term }}">
+                    <input class="col-sm-12 col-md-6 form-control border border-black rounded-0" type="text" name="q" value="{{ search_term }}">
                 {% else %}
-                    <input class="col-6 form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
+                    <input class="col-sm-12 col-md-6 form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
                 {% endif %}
-                <div class="col-2 input-group-append">
-                    <button class="form-control btn-black" type="submit">Search</button>
+                <div class="col-sm-6 col-md-3 input-group-append">
+                    <button class="form-control btn btn-info m-2" id="search" type="submit">Search</button>
+                    <a class="btn btn-secondary m-2" href="{% url 'shop' %}">RESET</a>
                 </div>
-
-                <div class="col-2">
-                    <select name="category_list" id="category_list">
+            </div>
+                <div class="row">
+                <div class="col-6 m-2">
+                    <select name="category_list" id="category_list" class="p-2">
                         <option value="reset" {% if category == 'all_proudcts' %}selected{% endif %}>All Products</option>   
                         <option value="equipment" {% if category == 'equipment' %}selected{% endif %}>Equipment</option>
                         <option value="clothing" {% if category == 'clothing' %}selected{% endif %}>Clothing</option>
                         <option value="accessories" {% if category == 'accessories' %}selected{% endif %}>Accessories</option>
                         <option value="nutrition" {% if category == 'nutrition' %}selected{% endif %}>Nutrition</option>                        
                     </select>
-                    <a class="btn" href="{% url 'shop' %}">RESET</a>
+                    
                 </div>
-            </div>
-            <div class="">
-                <select name="sort_list" id="sort_list">
+
+            <div class="col-6 m-2">
+                <select name="sort_list" id="sort_list" class="p-2">
                     <option value="reset" {% if current_sorting == 'None_None' %}selected{% endif %}>Sort by...</option>
                     <option value="price_asc" {% if current_sorting == 'price_asc' %}selected{% endif %}>Price (low to high)</option>
                     <option value="price_desc" {% if current_sorting == 'price_desc' %}selected{% endif %}>Price (high to low)</option>
@@ -37,17 +44,17 @@
                     <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
                 </select>
             </div>
+        </div>
         </form>
-        {% if request.user.is_authenticated %}
-            <span>SHOP ITEMS</span>       
+        {% if request.user.is_authenticated %}   
             {% if request.user.is_superuser %}
-                <a href="{% url 'add_product' %}" class="btn">Add Product</a>
+                <a href="{% url 'add_product' %}" class="btn btn-success m-2" id="add_product">Add Product</a>
             {% endif %}
         {% endif %}
 
     </div>
     <a class="{% if total %}text-info font-weight-bold{% else %}text-black{% endif %} nav-link" href="{% url 'basket' %}">
-        <div class="text-center">
+        <div class="text-right">
             <div><i class="fas fa-shopping-bag fa-lg"></i></div>
             <p class="my-0">
                 {% if total %}
@@ -79,23 +86,32 @@
                         <h5 class="card-title">{{ product.name }}</h5>
                         <p class="card-text">£{{ product.price}}</p>
                     </div>
-                    
-                        {% if request.user.is_authenticated %}  
-                            {% if request.user.is_superuser %}
-                                <div class="card-footer">
-                                    <a href="{% url 'edit_product' product.id %}" class="btn">Edit</a>
-                                    <a href="{% url 'delete_product' product.id %}" class="btn">Delete</a>
-                                </div>
-                            {% endif %}
+                
+                    {% if request.user.is_authenticated %}  
+                        {% if request.user.is_superuser %}
+                            <div class="card-footer">
+                                <a href="{% url 'edit_product' product.id %}" class="btn btn-secondary">Edit</a>
+                                <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}">
+                                <button class="del_prod btn btn-danger" type="submit"  data-toggle="modal" data-target="#delete_product_modal" data_prod>Delete</button>
+                            </div>
                         {% endif %}
-                    
+                    {% endif %}                     
                 </div>
             </div>
         {% endfor %}
+        <button type="submit" id="test">TEST</button>
+        {{ product.id }}
     </div>
 </div>
-
-
-
-
+ 
 {% endblock %}
+
+{% block postload_js %}
+    {{ block.super }}
+    <script src="{% static 'shop/js/shop.js' %}"></script>
+{% endblock %}
+
+
+
+ 
+

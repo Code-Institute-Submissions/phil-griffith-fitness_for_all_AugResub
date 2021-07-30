@@ -1,6 +1,33 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'home/css/home.css' %}">
+{% endblock %}
+
+
 {% block content %}
-    <h1 class="display-4 text-success">Fitness For All</h1>
+    <div class="container">
+        <div class="row home-page-1">
+            <div class="col-12 hero-content text-center">
+                <span class="m-auto">100% online gym</span>
+            </div>
+        </div>
+        <div class="row home-page-2">
+            <div class="col-12 text-center">
+                <p>Everything you will need full workout at home.</p>
+                <h2>Member Benefits</h2>
+                <table class="m-auto">
+                    <tr>
+                        <td>Workout Videos</td>
+                        <td>10% discount in the Shop</td>
+                    </tr>
+                    <tr>
+                        <td>Access to online instructors</td>
+                        <td>Access to Members blog</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock %}

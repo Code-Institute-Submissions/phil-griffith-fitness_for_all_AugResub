@@ -1,59 +1,440 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+![Hero Screenshot](documents/images/hero.png)
 
-Welcome phil-griffith,
+[Fitness For All](https://fitness-for-all.herokuapp.com/)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
-
-## Gitpod Reminders
-
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
-
-`python3 -m http.server`
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
-
-A blue button should appear to click: _Make Public_,
-
-Another blue button should appear to click: _Open Browser_.
-
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
-
-To log into the Heroku toolbelt CLI:
-
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
-
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidently make it public then you can create a new one with _Regenerate API Key_.
-
-## Updates Since The Instructional Video
-
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
-
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
-
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
-
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
-
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
-
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
-
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
-
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
-
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
-
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
-
+## Contents ##
 ---
 
-Happy coding!
+
+* UX
+    * [Introduction](#introduction)
+    * [User Stories](#user-stories)
+    * [Design](#design)
+        * [Wireframe](#design)
+        * [Database](#design)
+        * [Fonts](#fonts)
+        * [Icons](#icons)
+        * [Colours](#colours)
+
+* [Features](#features)
+* [Technologies](#technologies)
+* [Testing](#testing)
+* [Deployment](#deployment)
+* [Credit](#credits)
+
+<a name="introduction"></a>
+## Introduction ##
+
+Fitness For All is an online gym, that offers all users an online shop containing excerise clothing, equipment and nutritional food supplements and snacks. If a user would like to save their order history and basket, they can signup for free membership or full paid membership, which will additontally grant users access to workout videos, discounts in the shop, online 1 to 1 sessions with coaches and access to member profiles and blogs.
+
+The site also has built in managment functiounality which provides admin users with the abilty to add, remove and update products and workouts.
+
+
+
+## UX (User Experience) ##
+---
+
+<a name="user-stories"></a>
+### User Stories ### 
+
+As a user I would like to:
+
+* Have access to exercise and nutrition products
+See what the site has to offer before subscribing
+	As member
+		Get discounts for products
+		See order history
+		Have access to a variety of workout videos
+		Be able to view specific workouts for different fitness goals
+		Nutrition advise and assitance with creating a nutrition plan
+		Ability to share my progress and view other members progress 
+
+
+In addition to these options, as the admin user I would like:
+
+* To be able to Edit search categories
+* To be able to Edit all recipes
+
+
+As the site owner I would like to:
+
+* Sell branded exercise products
+* Sell Nutritional products
+* Encourage customers to join by providing:
+  * Discounted products
+  * Full access to workout videos
+  * Access to instructor coaching
+  * Abilty to view member progress updates
+  * Abilty to share personal progress updates
+* Manage members access
+* Manage products
+* Manage workout videos
+
+
+<a name="design"></a>
+
+## Design  ##
+---
+<a name="wireframes"></a>
+
+### Wireframes ###
+
+The webite was initially designed using [balsamiq](https://balsamiq.com/) to create wireframes representing the site structure. See link below for details
+
+
+* [Desktop](documents/wireframes/desktop.md)
+* [Tablet](documents/wireframes/tablet.md)
+* [Mobile](documents/wireframes/mobile.md)
+
+<a name="database"></a>
+
+### Database ###
+I used [dbdiagram.io](https://dbdiagram.io/d) to design the database structure and relations ships
+
+![](documents/images/database_design.png)
+
+
+<a name="fonts"></a>
+
+### **Fonts** ###
+
+In order to create the feeling of handwritten recipe cards I chose the following fonts from Google fonts.
+
+##### Logo and Recipe descriptions #####
+* Dancing Script cursive
+##### Titles #####
+* Courgette cursive
+
+##### Buttons and other where clairity is required #####
+* Comfortaa cursive, Style: Italic
+
+<a name="icons"></a>
+
+### **Icons** ###
+
+The following sites were used for icon creation
+
+* [Font Awesome](https://fontawesome.com/)
+* [Favicon.io](https://favicon.io/).
+* [Materialize CSS](https://materializecss.com/)
+
+<a name="colours"></a>
+
+### **Colours** ###
+
+For the majority of colours the below colour panel was used to represent different colours of the world (land, sky and sea)
+
+![](documents/images/colours.png)
+
+* ![](documents/images/colour1.png)
+    * like hover
+* ![](documents/images/colour2.png)
+    * Header & Footer
+* ![](documents/images/colour3.png)
+    * Submit Buttons
+* ![](documents/images/colour4.png)
+    * button effects
+* ![](documents/images/colour5.png)
+    * Background
+
+
+
+
+
+
+<a name="features"></a>
+## Features ## 
+---
+
+
+**Navigation bar**
+
+* Not signed in Nav Bar
+
+![](documents/images/navbar_su.png)
+
+* Not signed in Nav Bar Mobile
+
+![](documents/images/navbar_su_mob.png)
+
+* Standard User Nav Bar
+
+![](documents/images/navbar_signed_in.png)
+
+* Standard User Nav Bar Mobile
+
+![](documents/images/navbar_signed_in_mob1.png)
+
+![](documents/images/navbar_signed_in_mob2.png)
+
+* admin User Nav Bar
+
+![](documents/images/navbar_signed_in_admin.png)
+
+* admin User Nav Bar Mobile
+
+![](documents/images/navbar_signed_in_admin_mob.png)
+
+
+**Footer**
+
+* Social media links
+
+![](documents/images/footer_links_mob.png)
+
+**Home Page**
+
+* Popular Recipes Carousel
+
+![](documents/images/popular_recipes.png)
+
+* Blue like button showing number of likes and indicating current user has liked the recipe
+
+![](documents/images/like_button_blue.png)
+
+**Recipe Details Page**
+
+* Recipe showing:    
+    * Reicpe Name
+    * Category
+    * Country of origin
+    * Description
+    * Ingredients 
+    * Method steps 
+    * Likes 
+    * Favourite button
+
+![](documents/images/recipe_details.png)
+
+**Recipes Page**
+
+* Recipe card showing:
+    * Recipe name
+    * description
+    * added by
+    * likes* favourite
+    * Country of origin
+
+![](documents/images/recipe_card.png)
+
+* Search bar showing fields for:
+    * Country
+    * Category
+    * Vegetarian yes/no
+    * Keyword search
+
+![](documents/images/search.png)
+
+**Manage Recipes & My Recipes Page**
+
+* Edit & Delete Recipe buttons
+
+![](documents/images/edit_delete.png)
+
+**Manage Categories Page**
+
+* Manage Categories cards with Edit and Delete options
+
+![](documents/images/manage_cats.png)
+
+**Favourite Recipes Page**
+
+* Remove favourite button
+
+![](documents/images/remove_fav.png)
+
+**Add Recipe Page**
+
+
+![](documents/images/add_recipe.png)
+
+* Remove Ingredient & Remove step Buttons after click add 
+
+![](documents/images/remove_ingred_step.png)
+
+&nbsp;
+### **Defensive Programming** ###
+
+
+* Sign out confirm modal 
+
+![](documents/images/sign_out_modal.png)
+
+* Delete Recipe confirm modal 
+
+![](documents/images/delete_recipe_modal.png)
+
+* Delete Category confirm modal 
+
+![](documents/images/delete_cat.png)
+
+**Change Password**
+
+* Incorrect old password entered
+
+![](documents/images/wrong_old_pass.png)
+
+* New and confirm passwords don't match
+
+![](documents/images/wrong_confirm_pass.png)
+
+**Sign In**
+
+* Incorrect username or password entered
+
+![](documents/images/wrong_user_pass.png)
+
+**Register**
+
+* Incorrect confirm password entered
+
+![](documents/images/reg_pass.png)
+
+&nbsp;
+
+**Error 404**
+
+If a user tries to append an invalid html page to the site URL, or a 404 error is returned for some other reason, the below page will load providing a link to the Home page.
+
+![](documents/images/error404.png)
+
+&nbsp;
+
+<a name="technologies"></a>
+## Technologies, libraries and tools used ##
+---
+
+**Front-End**
+* [Bootstrap](https://bootstrap4.com/)
+* [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
+* [Font-Awesome](https://fontawesome.com/)
+* [Google fonts](https://fonts.google.com/)
+
+* [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
+* [Javascript](https://www.javascript.com/)
+
+* [materializecss](https://materializecss.com/)
+* [favicon.io](https://materializecss.com/)
+
+**Back-end**
+* [Flask](https://flask.palletsprojects.com/en/1.1.x/)
+* [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
+* [MongoDB](https://www.mongodb.com/1)
+* [Python](https://www.python.org/)
+* [Werkzeug](https://werkzeug.palletsprojects.com/en/1.0.x/)
+
+**Deployment**
+* [Heroku](https://dashboard.heroku.com/)
+* [Git](https://git-scm.com/)
+* [Github](https://github.com/)
+* [Gitpod](https://gitpod.io/)
+* [dbdiagram.io](https://dbdiagram.io/d)
+
+
+<a name="testing"></a>
+## Testing ##
+---
+
+Details of all tests that were performed can be found [here](documents/testing.md)
+
+In order to test this site as admin you will need the following credentials:
+* Username: admin
+* Password: Password1
+
+<a name="issues"></a>
+### Issues identified and fixed ###
+
+* Incorrect Recipes deleting & Removing from Favourites
+    * Issue was caused by a modal generation in for loop taking the same ID for every modal. Fixed by appending {{ loop.index }} to modal id
+* Change Password modal trying to flash messages to deleted my account page
+    * Fixed by changing modal to a Change password page where flash message can be displayed until password is successfully changed and then redirect to Home page
+
+In addition to the tests that were completed in the testing document, all code has been tested using the following code validators.
+
+* [JSHint](https://jshint.com/) (JS file passed validator)
+* [PEP8 online](http://pep8online.com/)
+* [W3C HTML Validator](https://validator.w3.org/) (all pages passed validator)
+* [W3C CSS Validator](https://jigsaw.w3.org/css-validator/) (css file passed validator)
+
+
+## Deployment ##
+---
+
+### Local Deployment ###
+
+* Open browser of choice.
+* Copy/Paste the address of [World Recipes](https://github.com/phil-griffith/world_recipes) in your search box.
+* When on the page, click on the "Code" button.
+* Copy the the [HTTPS Link](https://github.com/phil-griffith/world_recipes).
+* Open your IDE and in your terminal, create a virtual environment supporting python and flask and activate it.
+* Type "git clone" and paste the [HTTPS Link](https://github.com/phil-griffith/world_recipes).
+* Create an environement file called "env.py" and add :
+    - MONGO_URI=mongodb+srv://...
+    - SECRET_KEY= [Your Secret key]
+* Add your env.py to .gitignore. to avoid it being uploaded.
+* In app.py, switch **debug=False** to **debug=True**
+* Upgrade pip locally with the command "pip install -U pip".
+* Install the modules used to run the application using "pip freeze > requirements.txt" in your terminal.
+* Create a MongoDB account and create a database called **"world_recipes"**.
+* Add documtents to database collection as per [database design](#database)
+
+
+
+
+* You can now run your application locally by typing the command "python3 app.py" or "run app.py" in your terminal.
+* You can visit the website at http://127.0.0.1:5000
+
+## Deploying on Heroku<hr>
+
+- Create a requirements.txt file using the command **pip3 freeze --local > requirements.txt** in your CLI.
+- Create a Procfile (always with an uppercase P) through the command **echo web: python app.py > Procfile**. Commit and Push.
+- Create an account on [**Heroku**](https://www.heroku.com/home).
+- Create a new app (select nearest region).
+
+    ![](documents/images/Heroku_new_app.png)
+
+    ![](documents/images/Heroku_new_app2.png)
+
+- Link app to your **Github repository** in the **deployment** section.
+
+     ![](documents/images/Heroku_new_app3.png)
+
+- Navigate to Haroku Settings and set up the following in **Config Vars**
+    
+    * IP
+    * MONGO_DBNAME
+    * MONGO_URI
+    * PORT
+    * SECRET_KEY
+    * KEY
+
+
+
+
+
+* Go back to the Deploy section, select the master branch and deploy the project. 
+
+    ![](documents/images/Heroku_new_app4.png)
+
+
+<a name="credits"></a>
+## Credits ##
+---
+
+* CODE
+    * The code and design for the Sign in, Registration and Recipe forms is largely based on the Code Institute Mini Project (Task Manager)
+    * Some of the logic for User Recipe likes and favourites was taken from [jinja.palletsprojects.com](https://jinja.palletsprojects.com/en/2.10.x/templates/#assignments)
+    * CSS for the responsive text ellipsis effects for recipe cards was taken from [stackoverflow.com](https://stackoverflow.com/questions/33058004/applying-an-ellipsis-to-multiline-text)
+
+
+* Recipes
+    * https://www.bbcgoodfood.com/recipes/sausages-winter-veg-mash
+    * https://www.bbc.co.uk/food/recipes/spaghetti_bolognese_with_23409
+    * https://www.bbc.co.uk/food/recipes/hawaiian_pizza_48114
+    * https://www.japancentre.com/en/recipes/1141-datemaki
+
+* Home page images
+    * https://www.pnas.org/content/116/37/18152.full
+    * https://www.kcrw.com/culture/shows/good-food/sonoran-tortillas-korean-home-cooking-jet-ali-tila/making-korean-meals-at-home-is-easier-than-you-think-says-sohui-kim
+
+I would also like to thank my Mentor Aaron Sinnot for all of his advice and my family and friends for testing the site for me
