@@ -153,15 +153,21 @@ The following sites were used for icon creation
 
 ![](documentation/images/basket.png)
 
+&nbsp;
+
 **Basket Page**
 
 ![](documentation/images/shopping_basket.png)
+
+&nbsp;
 
 **Checkout**
 
 * Integrated Stripe payments
 
 ![](documentation/images/stripe_checkout.png)
+
+&nbsp;
 
 **Workouts**
 
@@ -170,85 +176,67 @@ The following sites were used for icon creation
 ![](documentation/images/workout_vids.png)
 
 
-![](documents/images/recipe_details.png)
+&nbsp;
 
-**Recipes Page**
+**Member Blog**
 
-* Recipe card showing:
-    * Recipe name
-    * description
-    * added by
-    * likes* favourite
-    * Country of origin
+* Member blog page with link to add blog
 
-![](documents/images/recipe_card.png)
+![](documentation/images/add_blog.png)
 
-* Search bar showing fields for:
-    * Country
-    * Category
-    * Vegetarian yes/no
-    * Keyword search
+&nbsp;
 
-![](documents/images/search.png)
+**Profile Page**
 
-**Manage Recipes & My Recipes Page**
+* Profile Page with tabs for Public profile, Full Profile and Order History
 
-* Edit & Delete Recipe buttons
-
-![](documents/images/edit_delete.png)
-
-**Manage Categories Page**
-
-* Manage Categories cards with Edit and Delete options
-
-![](documents/images/manage_cats.png)
-
-**Favourite Recipes Page**
-
-* Remove favourite button
-
-![](documents/images/remove_fav.png)
-
-**Add Recipe Page**
+![](documentation/images/profile_page.png)
 
 
-![](documents/images/add_recipe.png)
+**Site Admin**
 
-* Remove Ingredient & Remove step Buttons after click add 
+* Admin users will have access to the following addiontal features
 
-![](documents/images/remove_ingred_step.png)
+  * Edit and delete product buttons for each product on the shop page
+
+    ![](documentation/images/edit_delete.png)
+
+  * Add product button on the shop page
+
+    ![](documentation/images/add_product.png)
+
+  * Edit and delete workout buttons for each workout on the workouts page
+
+    ![](documentation/images/edit_delete_workout.png)
+
+  * Add workout button on the workouts page
+
+    ![](documentation/images/add_workout.png)
+
+
 
 &nbsp;
 ### **Defensive Programming** ###
 
 
-* Sign out confirm modal 
+* Sign out confirm 
 
-![](documents/images/sign_out_modal.png)
+![](documentation/images/sign_out_confirm.png)
 
-* Delete Recipe confirm modal 
+* Delete Product confirm modal 
 
-![](documents/images/delete_recipe_modal.png)
+![](documentation/images/delete_product_confirm.png)
 
-* Delete Category confirm modal 
+* Delete Workout confirm modal 
 
-![](documents/images/delete_cat.png)
+![](documentation/images/delete_workout_confirm.png)
 
-**Change Password**
-
-* Incorrect old password entered
-
-![](documents/images/wrong_old_pass.png)
-
-* New and confirm passwords don't match
-
-![](documents/images/wrong_confirm_pass.png)
 
 **Sign In**
 
 * Incorrect username or password entered
 
-![](documents/images/wrong_user_pass.png)
+![](documentation/images/incorrect_password.png)
 
 **Register**
 
@@ -258,11 +246,7 @@ The following sites were used for icon creation
 
 &nbsp;
 
-**Error 404**
 
-If a user tries to append an invalid html page to the site URL, or a 404 error is returned for some other reason, the below page will load providing a link to the Home page.
-
-![](documents/images/error404.png)
 
 &nbsp;
 

@@ -116,8 +116,6 @@ def login_check(request):
 class AccountSignupView(SignupView):
     # Signup View extended
 
-    # change template's name and path
-    print("Testing 123")
 
     def form_valid(self, form):
         # By assigning the User to a property on the view, we allow subclasses
@@ -137,7 +135,6 @@ class AccountSignupView(SignupView):
         form_data = {
             'first_name': self.request.POST['first_name'],
         }
-        print(form_data)
         return redirect('account_signup_view')
 
        

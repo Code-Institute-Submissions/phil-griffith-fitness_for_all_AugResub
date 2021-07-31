@@ -98,9 +98,9 @@ TEMPLATES = [
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 
 AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
+    # Needed to login by username in Django admin, regardless of `allauth`    
+    'django.contrib.auth.backends.ModelBackend',
     'fitness_for_all.backends.MyAuthenticationBackend',
-    # 'django.contrib.auth.backends.ModelBackend',
     
 
     # `allauth` specific authentication methods, such as login by e-mail
@@ -112,7 +112,7 @@ SITE_ID = 1
 ACCOUNT_FORMS = {
     'signup': 'profiles.forms.CustomSignupForm',
 }
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
