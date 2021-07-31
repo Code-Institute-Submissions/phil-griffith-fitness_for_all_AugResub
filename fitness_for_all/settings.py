@@ -127,21 +127,21 @@ WSGI_APPLICATION = 'fitness_for_all.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
-    }
+# if 'DATABASE_URL' in os.environ:
+#     DATABASES = {
+#         'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+#     }
 
-# DATABASES = {
-#         'default': dj_database_url.parse('postgres://kuweewugighnue:87eb87489fa6c375ec138d182e374dcee5b4f837e6effc391f91d1508a5a6bad@ec2-54-155-35-88.eu-west-1.compute.amazonaws.com:5432/d6n9dvtdu0hrmj')
-# }
+DATABASES = {
+        'default': dj_database_url.parse('postgres://kuweewugighnue:87eb87489fa6c375ec138d182e374dcee5b4f837e6effc391f91d1508a5a6bad@ec2-54-155-35-88.eu-west-1.compute.amazonaws.com:5432/d6n9dvtdu0hrmj')
+}
 
 
 
