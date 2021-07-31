@@ -80,14 +80,14 @@
                     </div>
                 </div>
 
-                <div class="col-12">
-                    <a href="{% url 'shop' %}" class="btn rounded-0 mt-5">
-                        <span class="icon">
-                            <i class="fas fa-chevron-left"></i>
-                        </span>
-                        <span class="text-uppercase">Back to Shop</span>
+                <div class="col-12 m-5">
+                    <span class="icon">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                    <a href="{% url 'shop' %}" class="btn rounded-0 text-uppercase btn btn-secondary">
+                        Back to Shop
                     </a>
-                    <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="Add to Basket">
+                    <button type="submit" class="btn btn-primary rounded-0 text-uppercase" value="Add to Basket">Add to Basket</button>
                 </div>
                 <input type="hidden" name="redirect_url" value="{{ request.path }}">
                 {% endwith %}

@@ -2,27 +2,29 @@
 {% load static %}
 
 {% block content %}
-    <h1 class="display-4 text-success">Member Profiles</h1>
+    
 
    
     <div class="container">
+        <h1 class="display-4 text-success">Member Profiles</h1>
         {% for user in profiles %}
             <div class="row member-profile p-4">
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-5">
                     {% if user.profile_pic %}
                         <img src="{{ user.profile_pic.url }}" alt="Profile picture">
                     {% else %}
                         <img src="{{ MEDIA_URL }}noimage.png" alt="No image" height="200px">
                     {% endif %}
                 </div>
-                <div class="col-12 col-lg-6">
+                <div class="col-12 col-lg-7">
+                    <p>Username: {{ user }}</p>                    
                     <span>Name:</span>
-                    {{ user.first_name }}
-                    {{ user.last_name }}
+                    {{ user.user.first_name|default_if_none:'' }}
+                    {{ user.user.last_name|default_if_none:'' }}
 
-                    <p>Age: {{ user.age }}</p>
+                    <p>Age: {{ user.age|default_if_none:'' }}</p>
                     <h4>Fitness Goal</h4>
-                    <p>{{ user.goal }}</p>
+                    <p>{{ user.goal|default_if_none:'' }}</p>
                 </div>
             </div>
             <hr>

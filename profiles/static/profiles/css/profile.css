@@ -8,6 +8,10 @@ table {
     white-space: nowrap;
 }
 
+#personal_details td {
+    width: 1%;
+}
+
 
 /* Signup form */
 

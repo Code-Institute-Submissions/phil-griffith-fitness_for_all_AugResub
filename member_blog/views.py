@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .forms import MemberBlogForm
 from .models import MemberBlog
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from fitness_for_all.decorators import full_membership_check
 
 # Create your views here.
 
+@login_required
+@full_membership_check
 def member_blog(request):
     """ Add a blog  """
 
@@ -18,7 +22,8 @@ def member_blog(request):
     return render(request, template, context)
 
 
-
+@login_required
+@full_membership_check
 def add_blog(request):
     """ Add a blog  """
 

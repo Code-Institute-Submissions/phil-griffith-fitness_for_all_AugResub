@@ -34,26 +34,35 @@
         </ul>
      
         <div class="card mb-8 my-auto">
-            <div class="row g-0">
-              <div class="col-md-4">
-                {% if profile.profile_pic %}
-                    <img src="{{ profile.profile_pic.url }}" alt="Profile picture">
-                {% else %}
-                    <img src="{{ MEDIA_URL }}noimage.png" alt="No image">
-                {% endif %}
-
-                  
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5 class="card-title">{{ profile.first_name }} {{ profile.last_name }}</h5>
-                  <p class="card-text">Age: {{ profile.age }}</p>
-                  <p class="card-text">Fitness Goal: {{ profile.goal }}</p>
-                  {% if profile.membership_fee_due == 0 %}
-                    <p class="card-text">Membership Expiry: {{ profile.membership_expiry_date }}</p>
-                  {% endif %}
+          <div class="row g-0">
+            <div class="col-md-4">
+                <div class="m-2">
+              {% if profile.profile_pic %}
+                  <img class="" width="100%" src="{{ profile.profile_pic.url }}" alt="Profile picture">
+              {% else %}
+                  <img src="{{ MEDIA_URL }}noimage.png" width="100%" alt="No image">
+              {% endif %}
                 </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-body">
+                  <table id="personal_details">
+                      <tr>
+                          <td>First Name</td><td>{{ profile.user.first_name|default_if_none:'' }}</td>
+                      </tr>
+                      <tr>
+                          <td>Last Name</td><td>{{ user.last_name|default_if_none:'' }}</td>
+                      </tr>
+                      <tr>
+                          <td>Age</td><td>{{ profile.age|default_if_none:'' }}</td>
+                      </tr>
+                      <tr>
+                          <td>Fitenss Goal</td><td>{{ profile.goal|default_if_none:'' }}</td>
+                      </tr>                      
+                  </table>
               </div>
             </div>
-          </div> 
+          </div>
+        </div>
+    </div>
 {% endblock %}

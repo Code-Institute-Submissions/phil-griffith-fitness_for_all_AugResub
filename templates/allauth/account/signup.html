@@ -10,8 +10,9 @@
 {% block head_title %}{% trans "Signup NOW" %}{% endblock %}
 
 {% block content %}
+<div class="container">
 <h1>{% trans "Sign Up" %}</h1>
-<span>TEST</span>
+
 
 <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
 <div class="container">
@@ -24,8 +25,9 @@
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
 
-  <button id="signup_submit" type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <button id="signup_submit" class="btn btn-success" type="submit">{% trans "Sign Up" %} &raquo;</button>
 </form>
+</div>
 </div>
 </div>
 </div>

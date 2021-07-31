@@ -1,7 +1,7 @@
 body {
     background-color: rgb(240, 245, 245);
     font-family: 'Gruppo', cursive;
-    margin-bottom: 60px;
+    margin-bottom: 100px;
 }
 
 .navbar, footer {
@@ -45,3 +45,11 @@ a i {
     width: 100%;
 	z-index: 2;
 }
+
+.toast-body {
+    color: black;
+}
+
+i.fas.fa-chevron-left {
+    padding: 0;
+  }

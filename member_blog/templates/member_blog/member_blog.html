@@ -6,11 +6,12 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="display-4 text-success">Member Blog</h1>
+    
 
    
     <div class="container">
-        <div class="col-10">
+        <h1 class="display-4 text-success">Member Blog</h1>
+        <div class="col-12">
             <div class="card member-blog">
                 {% for blog in member_blogs %}
                 <div class="row p-4">
@@ -29,8 +30,8 @@
 
         </div>
 
-        <div>
-        <a href="{% url 'add_blog' %}">Add Blog</a>
+        <div class="text-center mt-3">
+        <a href="{% url 'add_blog' %}" class="btn btn-success">Add Blog</a>
         </div>
     </div>
 {% endblock %}

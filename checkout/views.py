@@ -10,6 +10,7 @@ from shop.models import Product
 from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from basket.contexts import basket_contents
+from datetime import datetime, timedelta
 
 import stripe
 import json
@@ -304,7 +305,7 @@ def membership_checkout_success(request, order_number):
         # set membership fee to paid & activate selected membership
         profile.membership_fee_due = 0
         profile.membership_level = profile.membership_level_selected
-        profile.membership_expiry_date = datetime.now() + timedelta(days=membership_selected)
+        profile.membership_expiry_date = datetime.now() + timedelta(days=profile.membership_level_selected)
         profile.full_member = True
         profile.expired_full_member = False
         profile.save()

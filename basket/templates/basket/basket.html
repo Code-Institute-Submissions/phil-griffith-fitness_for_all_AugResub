@@ -3,10 +3,11 @@
 {% load basket_tools %}
 
 {% block content %}
-    <h1 class="display-4 text-success">Shopping Basket</h1>
+    
 
 
-    <div class="container">
+    <div class="container m-3">
+        <h1 class="display-4 text-success">Shopping Basket</h1>
         <div class="row">
             <div class="col-6">
                 {% if basket_items %}
@@ -27,21 +28,25 @@
                                     {% if item.product.has_sizes %}
                                         <input type="hidden" name="product_size" value="{{ item.size }}">
                                     {% endif %}
-                                    <span>{{ item.product.price | calc_subtotal:item.quantity }}</span>
+                                    <div class="ml-3" > 
+                                    <span>£{{ item.product.price | calc_subtotal:item.quantity }}</span>
+                                </div>
                                 </div>
                             </div>
                         </form>
                         <a class="update-link text-info"><small>Update</small></a>
                         <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
                     {% endfor %}
-                    <span>TOTAL: {{ total }}</span>
+                    <div class="mt-5">
+                    <span>TOTAL: £{{ total }}</span>
+                    </div>
                 {% else %}
                     <span>Your Basket is empty</span>
                     <a href="{% url 'shop' %}">Back to shop</a>
                 {% endif %}
             </div>
             <div class="col-6">
-                <a class="btn" href="{% url 'checkout' %}" >Checkout</a>
+                <a class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
             </div>
         </div>
     </div>   

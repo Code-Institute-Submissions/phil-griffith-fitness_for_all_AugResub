@@ -4,6 +4,10 @@ body {
     color: #fff;
 }
 
+.toast-body {
+    color:black;
+}
+
 .home-page-1 {
     z-index: 10;
     background-image: url("/media/home.jpg");

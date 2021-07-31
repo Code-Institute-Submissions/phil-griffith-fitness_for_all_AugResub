@@ -12,6 +12,7 @@ from allauth.exceptions import ImmediateHttpResponse
 from allauth.account.utils import complete_signup
 from allauth.account import app_settings
 from datetime import datetime, timedelta
+from fitness_for_all.decorators import full_membership_check
 import json
 
 
@@ -88,6 +89,7 @@ def order_history(request):
 
 
 @login_required
+@full_membership_check
 def member_profiles(request):
     """ Display the user's profile. """
 

@@ -7,6 +7,9 @@ class MemberBlogForm(forms.ModelForm):
     class Meta:
         model = MemberBlog
         fields = '__all__'
+        widgets = {
+            'comment': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

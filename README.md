@@ -82,31 +82,25 @@ As the site owner I would like to:
 The webite was initially designed using [balsamiq](https://balsamiq.com/) to create wireframes representing the site structure. See link below for details
 
 
-* [Desktop](documents/wireframes/desktop.md)
-* [Tablet](documents/wireframes/tablet.md)
-* [Mobile](documents/wireframes/mobile.md)
+* [Desktop](documentation/wireframes/desktop.md)
+* [Tablet](documentation/wireframes/tablet.md)
+* [Mobile](documentation/wireframes/mobile.md)
 
 <a name="database"></a>
 
 ### Database ###
 I used [dbdiagram.io](https://dbdiagram.io/d) to design the database structure and relations ships
 
-![](documents/images/database_design.png)
+![](documentation/images/db_diagram.png)
 
 
 <a name="fonts"></a>
 
 ### **Fonts** ###
 
-In order to create the feeling of handwritten recipe cards I chose the following fonts from Google fonts.
+In order to create the feeling of modern concept of an online only gym, I chose the following font from Google fonts.
 
-##### Logo and Recipe descriptions #####
-* Dancing Script cursive
-##### Titles #####
-* Courgette cursive
-
-##### Buttons and other where clairity is required #####
-* Comfortaa cursive, Style: Italic
+* Gruppo cursive
 
 <a name="icons"></a>
 
@@ -116,31 +110,8 @@ The following sites were used for icon creation
 
 * [Font Awesome](https://fontawesome.com/)
 * [Favicon.io](https://favicon.io/).
-* [Materialize CSS](https://materializecss.com/)
 
 <a name="colours"></a>
-
-### **Colours** ###
-
-For the majority of colours the below colour panel was used to represent different colours of the world (land, sky and sea)
-
-![](documents/images/colours.png)
-
-* ![](documents/images/colour1.png)
-    * like hover
-* ![](documents/images/colour2.png)
-    * Header & Footer
-* ![](documents/images/colour3.png)
-    * Submit Buttons
-* ![](documents/images/colour4.png)
-    * button effects
-* ![](documents/images/colour5.png)
-    * Background
-
-
-
-
-
 
 <a name="features"></a>
 ## Features ## 
@@ -151,58 +122,53 @@ For the majority of colours the below colour panel was used to represent differe
 
 * Not signed in Nav Bar
 
-![](documents/images/navbar_su.png)
-
-* Not signed in Nav Bar Mobile
-
-![](documents/images/navbar_su_mob.png)
-
-* Standard User Nav Bar
-
-![](documents/images/navbar_signed_in.png)
-
-* Standard User Nav Bar Mobile
-
-![](documents/images/navbar_signed_in_mob1.png)
-
-![](documents/images/navbar_signed_in_mob2.png)
-
-* admin User Nav Bar
-
-![](documents/images/navbar_signed_in_admin.png)
-
-* admin User Nav Bar Mobile
-
-![](documents/images/navbar_signed_in_admin_mob.png)
+![](documentation/images/non_member_nav.png)
 
 
-**Footer**
+* Signed in Standard User Nav Bar
 
-* Social media links
+![](documentation/images/free_member_nav.png)
 
-![](documents/images/footer_links_mob.png)
 
-**Home Page**
+* Full Member Nav Bar
 
-* Popular Recipes Carousel
+![](documentation/images/full_member_signed_in_nav.png)
 
-![](documents/images/popular_recipes.png)
 
-* Blue like button showing number of likes and indicating current user has liked the recipe
+&nbsp;
 
-![](documents/images/like_button_blue.png)
+**Shop**
 
-**Recipe Details Page**
+* Product search - with filter for product categories and sort by price and name
 
-* Recipe showing:    
-    * Reicpe Name
-    * Category
-    * Country of origin
-    * Description
-    * Ingredients 
-    * Method steps 
-    * Likes 
-    * Favourite button
+![](documentation/images/shop_search.png)
+
+* Add to basket section on Product detail with quantity selector
+
+
+![](documentation/images/add_to_basket.png)
+
+* Basket - link
+
+
+![](documentation/images/basket.png)
+
+**Basket Page**
+
+![](documentation/images/shopping_basket.png)
+
+**Checkout**
+
+* Integrated Stripe payments
+
+![](documentation/images/stripe_checkout.png)
+
+**Workouts**
+
+* Workout videos with category filter
+
+![](documentation/images/workout_vids.png)
+
 
 ![](documents/images/recipe_details.png)
 
