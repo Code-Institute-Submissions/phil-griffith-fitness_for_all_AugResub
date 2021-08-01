@@ -91,7 +91,7 @@
                             <div class="card-footer">
                                 <a href="{% url 'edit_product' product.id %}" class="btn btn-secondary">Edit</a>
                                 <input type="hidden" id="product_id{{ product.id}}" name="product_id" value="{{ product.id }}">
-                                <button class="del_prod btn btn-danger" type="submit"  data-toggle="modal" data-target="#delete_product_modal" >Delete</button>
+                                <button class="del_prod btn btn-danger" type="submit"  data-toggle="modal" data-target="#delete_product_modal">Delete</button>
                             </div>
                         {% endif %}
                     {% endif %}                     
