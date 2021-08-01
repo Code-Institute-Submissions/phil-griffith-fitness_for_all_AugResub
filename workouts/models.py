@@ -24,7 +24,7 @@ class Workouts(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True, on_delete=models.SET_NULL)
     name = models.CharField(max_length=254)
     description = models.TextField()
-    video_url = models.URLField(max_length=1024, null=True, blank=True)
+    video_url = models.URLField(max_length=1024, null=True)
     video_image = models.ImageField(null=True, blank=True)
 
     def __str__(self):

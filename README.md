@@ -40,33 +40,20 @@ The site also has built in managment functiounality which provides admin users w
 As a user I would like to:
 
 * Have access to exercise and nutrition products
-See what the site has to offer before subscribing
-	As member
-		Get discounts for products
-		See order history
-		Have access to a variety of workout videos
-		Be able to view specific workouts for different fitness goals
-		Nutrition advise and assitance with creating a nutrition plan
-		Ability to share my progress and view other members progress 
-
-
-In addition to these options, as the admin user I would like:
-
-* To be able to Edit search categories
-* To be able to Edit all recipes
+* See what the site has to offer before becoming a full member
+* As a full member I would like to:
+  * Get discounts for products
+  * See order history
+  * Have access to a variety of workout videos
+  * Be able to view specific workouts for different fitness goals
+  * Have access to exercise and nutrition advice
+  * Ability to share my progress and view other members progress 
 
 
 As the site owner I would like to:
 
 * Sell branded exercise products
 * Sell Nutritional products
-* Encourage customers to join by providing:
-  * Discounted products
-  * Full access to workout videos
-  * Access to instructor coaching
-  * Abilty to view member progress updates
-  * Abilty to share personal progress updates
-* Manage members access
 * Manage products
 * Manage workout videos
 

@@ -20,17 +20,16 @@
         </div>
         <div class="row">
             <div class="col-12 col-lg-6">
-                <h3>Shipping Address</h3>
                 <form enctype="multipart/form-data" action="{% url 'edit_profile' %}" method="POST" id="profile-update-form">
                     {% csrf_token %}
-                    {{ form|crispy }}
-                    <button class="btn btn-success">Update profile</button>
+                    {{ form|crispy }}                    
                     <h4>Image preview</h4>
                         {% if profile.profile_pic %}
                             <img src="{{ profile.profile_pic.url }}" alt="Profile picture">
                         {% else %}
                             <img src="{{ MEDIA_URL }}noimage.png" alt="No image">
                         {% endif %}
+                    <button class="btn btn-success">Update profile</button>
                 </form>
             </div>
         </div>
