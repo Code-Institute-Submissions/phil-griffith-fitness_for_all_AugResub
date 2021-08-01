@@ -11,7 +11,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user',)
+        exclude = ('user', 'date_joined', 'membership_expiry_date', 'expired_full_member', 'membership_level', 'membership_level_selected','membership_fee_due', 'full_member' )
         # https://stackoverflow.com/questions/8761106/how-can-i-get-a-textarea-from-modelmodelform
         widgets = {
             'goal': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
