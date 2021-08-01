@@ -14,9 +14,9 @@
         <form method="GET" action="{% url 'shop' %}">
             <div class="row input-group w-100 m-2">
                 {% if search_term %}
-                    <input class="col-sm-12 col-md-6 form-control border border-black rounded-0" type="text" name="q" value="{{ search_term }}">
+                    <input class="col-sm-12 col-md-6 form-control border border-black rounded-0 m-2" type="text" name="q" value="{{ search_term }}">
                 {% else %}
-                    <input class="col-sm-12 col-md-6 form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
+                    <input class="col-sm-12 col-md-6 form-control border border-black rounded-0 m-2" type="text" name="q" placeholder="Search">
                 {% endif %}
                 <div class="col-sm-6 col-md-3 input-group-append">
                     <button class="form-control btn btn-info m-2" id="search" type="submit">Search</button>
