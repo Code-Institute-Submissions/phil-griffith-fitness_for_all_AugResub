@@ -255,7 +255,7 @@ The colours chosen for this site are predominantly various shades of green to re
 ## Testing ##
 ---
 
-Details of all tests that were performed can be found [here](documents/testing.md)
+Details of all tests that were performed can be found [here](documentation/testing.md)
 
 In order to test this site as admin you will need the following credentials:
 * Username: ffa_admin
