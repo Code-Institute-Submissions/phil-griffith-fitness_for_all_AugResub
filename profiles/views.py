@@ -135,13 +135,10 @@ def update_membership(request):
 
     if membership_selected == 30:
         fee_due = 19.99
-        print("30 days")
     elif membership_selected == 180:
         fee_due = 99.99
-        print("180 days")
     else:
         fee_due = 159.99
-        print("365 days")
     profile.membership_fee_due = fee_due
     profile.membership_level_selected = membership_selected
     profile.save()

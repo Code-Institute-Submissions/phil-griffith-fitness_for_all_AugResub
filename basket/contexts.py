@@ -1,4 +1,3 @@
-from decimal import Decimal
 from django.conf import settings
 from django.shortcuts import get_object_or_404
 from shop.models import Product
@@ -38,12 +37,9 @@ def basket_contents(request):
     # Check for full member and apply discount
     if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=request.user)
-        print(profile)
         if profile.full_member:
-            print("Fullmembergetsdiscount")
             discount = total / 10
         else:
-            print("Nodiscount")
             discount = 0
                        
     delivery = settings.STANDARD_DELIVERY_CHARGE
