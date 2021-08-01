@@ -1,4 +1,4 @@
-![Hero Screenshot](documents/images/hero_image.png)
+![Hero Screenshot](documentation/images/hero_image.png)
 
 [Fitness For All](https://fitness-for-all.herokuapp.com/)
 
@@ -351,6 +351,10 @@ Fot this app to be fully functionally locally and on Heroku, the following are r
 * CODE
     * The code and design for the Sign in, Registration and Shop is largely based on the Code Institute Project (Boutique Ado)
 
+
+* Home Page
+  * Hero
+    * https://letsbands.com/media/wysiwyg/bilder/coach-training-studios2.jpg
 
 * Shop items
   * Clothes
