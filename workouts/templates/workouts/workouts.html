@@ -40,7 +40,7 @@
                                 <h5 class="card-title">{{workout.name }}</h5>
                                 <div>
                                     <a href="{% url 'workout' workout.id %}">
-                                        <img src="{{ workout.video_image.url }}" alt="" width="100%">
+                                        <img src="{{ workout.video_image.url }}" alt="" width="100">
                                     </a>
                                 </div>
                             </div>
@@ -48,9 +48,9 @@
                                 {% if request.user.is_superuser %}
                                     <div class="card-footer">
                                         <a href="{% url 'edit_workout' workout.id %}" class="btn btn-secondary">Edit</a>
-                                        <input type="hidden" id="workout_id{{ workout_id }}" name="workout_id{{ workout_id }}" value="{{ workout.id }}">
+                                        <input type="hidden" id="workout_id{{ workout_id }}" name="workout_id" value="{{ workout.id }}">
                                         <button class="del_workout btn btn-danger" type="submit" data-toggle="modal"
-                                            data-target="#delete_workout_modal" data_prod>Delete</button>
+                                            data-target="#delete_workout_modal">Delete</button>
                                     </div>
                                 {% endif %}
                             {% endif %}
