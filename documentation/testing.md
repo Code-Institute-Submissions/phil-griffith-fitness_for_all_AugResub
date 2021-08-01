@@ -96,7 +96,7 @@ The following tests have been completed during the development of this site.
 ### Shop ###
 ---
 
-##### Search #####
+#### Search ####
 
 * Enter search term in search bar and click Search or press Enter
   * Expect: Any matching products to be displayed
@@ -120,6 +120,35 @@ The following tests have been completed during the development of this site.
   * Expect: Products to be sorted by Name (A-Z)
 * Click Sort by and chose Name (Z-A)
   * Expect: Products to be sorted by Name (Z-A)
+
+#### Product Detail page ####
+
+* Click up/down arrows in qunatity field
+  * Expect quantity to change
+* Click Add to Basket
+  * Expect item to be added to basket, basket icon to show update total for basket and toast success message to confirm item added
+* Click Remove
+  * Expect item/s to be removed and toast meesage to confirm
+* Click Checkout
+  * Expect checkout page to load
+
+
+&nbsp;
+### Checkout ###
+---
+
+* Complete all form fields and add invalid card details then click Complete Order
+  * Expect: Error message - Your card number is invalid
+* Complete all form fields and add valid card details then click Complete Order
+  * Expect: Spinning processing icon and then a confirmation page advising that an email has been sent. Email should be received.
+
+
+#### Full Member ####
+  * Expect: Member discount to be showing and total to be discounted by 10%
+  * Complete all fields of address and click the Save delivery information to my profile, then complete checkout
+  * Expect: Address details to be added to users profile and order to be showing in user profile order history
+
+
 
 &nbsp;
 ### Workouts ###

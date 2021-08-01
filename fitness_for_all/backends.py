@@ -1,9 +1,10 @@
-from allauth.account.auth_backends import AuthenticationBackend, ModelBackend
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from allauth.account.auth_backends import ModelBackend
+from django.shortcuts import get_object_or_404
+from django.contrib.auth.models import User
 from profiles.models import UserProfile
-from allauth.account.utils import filter_users_by_email, filter_users_by_username
-from datetime import datetime, timedelta
+from allauth.account.utils import filter_users_by_username
 from datetime import date
+
 
 class MyAuthenticationBackend(ModelBackend):
 
@@ -20,7 +21,7 @@ class MyAuthenticationBackend(ModelBackend):
                 return ret
 
             else:        
-                # check if memebership status 
+                # check if memebership status
 
                 # check for free user
                 if profile.membership_level == 0:
@@ -39,13 +40,13 @@ class MyAuthenticationBackend(ModelBackend):
 
                         return ret
                 else:
-                    # If membership has expired set expired full member flag to true
+                    # If membership has expired set expired
+                    # full member flag to true
 
                     profile.expired_full_member = True
                     profile.full_member = False
                     profile.save()
                     return ret
-        except:
-            return None 
+        except User.DoesNotExist:
+            return None
 
-       

@@ -2,10 +2,7 @@
 {% load static %}
 {% load basket_tools %}
 
-{% block content %}
-    
-
-
+{% block content %} 
     <div class="container m-3">
         <h1 class="display-4 text-success">Shopping Basket</h1>
         <div class="row">
@@ -24,13 +21,13 @@
                                         name="quantity" value="{{ item.quantity }}" min="1" max="99"
                                         data-item_id="{{ item.item_id }}"
                                         id="id_qty_{{ item.item_id }}">
-                                  
+                                    
                                     {% if item.product.has_sizes %}
                                         <input type="hidden" name="product_size" value="{{ item.size }}">
                                     {% endif %}
                                     <div class="ml-3" > 
-                                    <span>£{{ item.product.price | calc_subtotal:item.quantity }}</span>
-                                </div>
+                                        span>£{{ item.product.price | calc_subtotal:item.quantity }}</span>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -38,7 +35,7 @@
                         <a class="remove-item text-danger float-right" id="remove_{{ item.item_id }}" data-product_size="{{ item.size }}"><small>Remove</small></a>
                     {% endfor %}
                     <div class="mt-5">
-                    <span>TOTAL: £{{ total }}</span>
+                        <span>TOTAL: £{{ total }}</span>
                     </div>
                 {% else %}
                     <span>Your Basket is empty</span>

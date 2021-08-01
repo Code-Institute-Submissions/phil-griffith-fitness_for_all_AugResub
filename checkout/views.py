@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse, \
+    get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
@@ -8,7 +9,6 @@ from .models import Order, OrderLineItem
 
 from shop.models import Product
 from profiles.models import UserProfile
-from profiles.forms import UserProfileForm
 from basket.contexts import basket_contents
 from datetime import datetime, timedelta
 
@@ -88,7 +88,6 @@ def checkout(request):
                 # Check for full member and apply discount
             if request.user.is_authenticated:
                 profile = UserProfile.objects.get(user=request.user)
-                print(profile)
                 if profile.full_member:
                     order.discount = order.order_total / 10
                     order.order_total = order.order_total - order.discount
@@ -97,7 +96,8 @@ def checkout(request):
 
             # Save the info to the user's profile if all is well
             request.session['save_info'] = 'save-info' in request.POST
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse(
+                'checkout_success', args=[order.order_number]))
         else:
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
@@ -106,8 +106,6 @@ def checkout(request):
         if not basket:
             messages.error(request, "There's nothing in your basket at the moment")
             return redirect(reverse('products'))
-
-
         current_basket = basket_contents(request)
         total = current_basket['grand_total']
         stripe_total = round(total * 100)
@@ -116,7 +114,6 @@ def checkout(request):
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
-
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
             try:
@@ -146,9 +143,7 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
-
     }
-
     return render(request, template, context)
 
 
@@ -157,7 +152,6 @@ def checkout_success(request, order_number):
     Handle successful checkouts
     """
     save_info = request.session.get('save_info')
-    print(save_info)
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
@@ -168,8 +162,6 @@ def checkout_success(request, order_number):
 
         # Save the user's info
         if save_info:
-            print("User chose to save info")
-            print(profile.user)
 
             profile.default_phone_number = order.phone_number
             profile.default_country = order.country
@@ -192,7 +184,6 @@ def checkout_success(request, order_number):
     context = {
         'order': order,
     }
-
     return render(request, template, context)
 
 
@@ -240,7 +231,7 @@ def membership_checkout(request):
             intent = stripe.PaymentIntent.create(
                 amount=stripe_total,
                 currency=settings.STRIPE_CURRENCY,
-            )        
+            )
 
         # Attempt to prefill the form with any info the user maintains in their profile
         if request.user.is_authenticated:
@@ -266,7 +257,6 @@ def membership_checkout(request):
         messages.warning(request, 'Stripe public key is missing. \
             Did you forget to set it in your environment?')
 
-
     template = 'checkout/membership_checkout.html'
     profile = UserProfile.objects.get(user=request.user)
 
@@ -276,7 +266,6 @@ def membership_checkout(request):
         item = "6 Months Membership"
     else:
         item = "1 years Membership"
-
 
     context = {
         'order_form': order_form,
@@ -305,7 +294,8 @@ def membership_checkout_success(request, order_number):
         # set membership fee to paid & activate selected membership
         profile.membership_fee_due = 0
         profile.membership_level = profile.membership_level_selected
-        profile.membership_expiry_date = datetime.now() + timedelta(days=profile.membership_level_selected)
+        profile.membership_expiry_date = datetime.now() + \
+            timedelta(days=profile.membership_level_selected)
         profile.full_member = True
         profile.expired_full_member = False
         profile.save()
@@ -344,4 +334,3 @@ def cancel_membership_purchase(request):
     profile.save()
 
     return redirect('personal_details')
-

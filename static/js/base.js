@@ -22,8 +22,6 @@ $(document).ready(function() {
                 window.location.replace(currentUrl);
             }
     });
-
-
       $("#category_list").on('change', function(){
         let selector = $(this);
             let currentUrl = new URL(window.location);
@@ -37,9 +35,5 @@ $(document).ready(function() {
 
                 window.location.replace(currentUrl);
             }
-    });
-
-
-
-    
+    });    
 });

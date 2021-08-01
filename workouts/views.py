@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from fitness_for_all.decorators import full_membership_check
-from django.db.models import Q
 from django.db.models.functions import Lower
 from .models import Workouts, Category
 from .forms import WorkoutsForm
@@ -14,7 +13,7 @@ def workouts(request):
     """ View to return workouts page """
 
     # code taken from Code Institute Boutique Ado walk through project
-    workouts = Workouts.objects.all()    
+    workouts = Workouts.objects.all() 
     categories = None
     sort = None
     direction = None
@@ -39,11 +38,10 @@ def workouts(request):
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
             category = categories[0]
-            
-            
+
             workouts = workouts.filter(category__name__in=categories)
             categories = Category.objects.filter(name__in=categories)
-       
+
     current_sorting = f'{sort}'
     context = {
         'workouts': workouts,
@@ -82,10 +80,12 @@ def add_workout(request):
             messages.success(request, 'Successfully added workout!')
             return redirect(reverse('workout', args=[workout.id]))
         else:
-            messages.error(request, 'Failed to add workout. Please ensure the form is valid.')
+            messages.error(
+                request, 'Failed to add workout. \
+                    Please ensure the form is valid.')
     else:
         form = WorkoutsForm()
-        
+
     template = 'workouts/add_workout.html'
     context = {
         'form': form,
@@ -109,7 +109,9 @@ def edit_workout(request, workout_id):
             messages.success(request, 'Successfully updated workout!')
             return redirect(reverse('workout', args=[workout.id]))
         else:
-            messages.error(request, 'Failed to update workout. Please ensure the form is valid.')
+            messages.error(
+                request, 'Failed to update workout. \
+                    Please ensure the form is valid.')
     else:
         form = WorkoutsForm(instance=workout)
         messages.info(request, f'You are editing {workout.name}')
@@ -129,15 +131,12 @@ def delete_workout(request):
     if not request.user.is_superuser:
         messages.error(request, 'Sorry, only site owners can do that.')
         return redirect(reverse('workouts'))
-        
+
     workout_id = (request.POST['workout_id'])
     workout = get_object_or_404(Workouts, pk=workout_id)
     workout.delete()
     messages.success(request, 'Workout deleted!')
     return redirect(reverse('workouts'))
-
-    
-    
 
 
 

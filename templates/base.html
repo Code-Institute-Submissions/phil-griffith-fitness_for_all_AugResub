@@ -3,7 +3,6 @@
 <!doctype html>
 <html lang="en">
   <head>
-
     {% block meta %}
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="utf-8">
@@ -42,7 +41,6 @@
   </head>
   <body>
       <header class="container-fluid fixed-top"></header>
-
       <nav class="navbar navbar-expand-lg navbar-light ">
         <a class="navbar-brand" href="#">
           
@@ -93,7 +91,6 @@
           </ul>
         </div>
       </nav>
-
       {% if messages %}
         <div class="message-container">
             {% for message in messages %}
@@ -175,8 +172,6 @@
           </div>
         </div>
       </div>
-
-
       <!-- upgrade membership Modal -->
       <div class="modal fade" id="upgrade_member_modal" tabindex="-1" role="dialog" aria-labelledby="upgrade_member_modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -209,7 +204,6 @@
           </div>
         </div>
       </div>
-
       <!-- delete product modal -->
       <div class="modal fade" id="delete_product_modal" tabindex="-1" role="dialog" aria-labelledby="delete_product_modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -234,11 +228,9 @@
                 <button type="submit" class="btn btn-primary">Yes</button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
-
        <!-- delete workout modal -->
        <div class="modal fade" id="delete_workout_modal" tabindex="-1" role="dialog" aria-labelledby="delete_workout_modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -263,12 +255,10 @@
                 <button type="submit" class="btn btn-primary">Yes</button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
-      {% endblock %}
- 
+      {% endblock %} 
 
       {% block extra_modals %}
       {% endblock %}
@@ -277,7 +267,6 @@
       <script type='text/javascript'>
         $('.toast').toast('show')
       </script>
-      {% endblock %}
-   
+      {% endblock %}   
   </body>
 </html>

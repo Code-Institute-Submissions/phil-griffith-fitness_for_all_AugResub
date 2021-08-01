@@ -4,6 +4,7 @@ from profiles.models import UserProfile
 # https://stackoverflow.com/questions/63434014/how-to-use-to-make-custom-decorators-in-django
 # https://micropyramid.medium.com/custom-decorators-to-check-user-roles-and-permissions-in-django-ece6b8a98d9d
 
+
 def is_free_member(self):
     if self.membership_level == 0:
         return True

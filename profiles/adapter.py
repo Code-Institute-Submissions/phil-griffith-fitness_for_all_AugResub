@@ -1,6 +1,7 @@
 from allauth.account.adapter import DefaultAccountAdapter
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 from django.urls import reverse
+
 
 # if account is inactive, redirect to shop page
 class ProfileAppAccountAdapter(DefaultAccountAdapter):

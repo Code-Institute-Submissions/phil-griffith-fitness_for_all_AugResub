@@ -1,20 +1,13 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
 from .models import UserProfile
 from .forms import UserProfileForm
-from django.urls import reverse
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib import messages
 from allauth.account.views import SignupView
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.account.utils import complete_signup
 from allauth.account import app_settings
-from datetime import datetime, timedelta
 from fitness_for_all.decorators import full_membership_check
-import json
-
 
 
 @login_required
@@ -112,10 +105,8 @@ def login_check(request):
         return redirect(reverse('membership_checkout'))
 
 
-
 class AccountSignupView(SignupView):
     # Signup View extended
-
 
     def form_valid(self, form):
         # By assigning the User to a property on the view, we allow subclasses
@@ -131,13 +122,9 @@ class AccountSignupView(SignupView):
             )
         except ImmediateHttpResponse as e:
             return e.response
-
-        form_data = {
-            'first_name': self.request.POST['first_name'],
-        }
         return redirect('account_signup_view')
 
-       
+
 account_signup_view = AccountSignupView.as_view()
 
 
@@ -145,7 +132,6 @@ def update_membership(request):
     profile = get_object_or_404(UserProfile, user=request.user)
 
     membership_selected = int(request.POST['membership_type'])
-
 
     if membership_selected == 30:
         fee_due = 19.99

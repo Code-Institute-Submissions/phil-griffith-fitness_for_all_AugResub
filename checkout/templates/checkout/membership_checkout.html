@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-
     <div class="container">
         <div class="row">
             <div class="col">
@@ -16,7 +15,6 @@
                 <hr>
             </div>
         </div>
-
         <div class="row">
             <div class="col-12 col-lg-6 mb-5">
                 <p class="text-muted">Order Summary</p>
@@ -27,9 +25,7 @@
                     <div class="col-3 text-right">
                         <p class="mb-1 mt-0 small text-muted"></p>
                     </div>
-
                 </div>
-
                 <div class="row">
                     <div class="col-2 mb-1">
                         <a href="{% url ''  %}">
@@ -40,9 +36,7 @@
                             {% endif %}
                         </a>
                     </div>
-
                 </div>
-
                 <hr class="my-0">
                 <div class="row text-black text-right">
                     <div class="col-7 offset-2">
@@ -77,8 +71,10 @@
                         {{ order_form.country | as_crispy_field }}
                         <div class="form-check form-check-inline float-right mr-0">
                             {% if user.is_authenticated %}
-                                <label for="id-save-info" class="form-check-label">Save this delivery information to my profile</label>
-                                <input type="checkbox" class="form-check-input ml-2 mr-0" id="id-save-info" name="save-info" checked>
+                                <label for="id-save-info" class="form-check-label">Save this delivery information to my
+                                    profile</label>
+                                <input type="checkbox" class="form-check-input ml-2 mr-0" id="id-save-info" name="save-info"
+                                    checked>
                             {% else %}
                                 <label for="id-save-info" class="form-check-label">
                                     <a href="{% url 'account_signup' %}" class="text-info">Create an account</a> or
@@ -97,11 +93,9 @@
                         <!-- Pass the client secret to the view so we can get the payment intent id -->
                         <input type="hidden" value="{{ client_secret }}" name="client_secret">
                     </fieldset>
-
-
-
-                    <div class="submit-button text-right mt-5 mb-2">                         
-                        <a href="" class="btn btn-black rounded-0" id="cancel-button" data-toggle="modal" data-target="#cancel_membership_modal">
+                    <div class="submit-button text-right mt-5 mb-2">
+                        <a href="" class="btn btn-black rounded-0" id="cancel-button" data-toggle="modal"
+                            data-target="#cancel_membership_modal">
                             <span class="font-weight-bold">Cancel</span>
                             <span class="icon">
                                 <i class="fas fa-lock"></i>
@@ -131,34 +125,32 @@
             </span>
         </h1>
     </div>
-
-     <!-- cancel membership Modal -->
-     <div class="modal fade" id="cancel_membership_modal" tabindex="-1" role="dialog" aria-labelledby="cancel_membership_modalLabel" aria-hidden="true">
+    <!-- cancel membership Modal -->
+    <div class="modal fade" id="cancel_membership_modal" tabindex="-1" role="dialog"
+        aria-labelledby="cancel_membership_modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="cancel_membership_modalLabel">Cancel Membership</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancel_membership_modalLabel">Cancel Membership</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{% url 'update_membership' %}" method="POST" id="update_membership-form">
+                    {% csrf_token %}
+                    <div class="modal-body">
+                        <div class="membership-modal">
+                            <p>Are you sure you want to cancel your membership purchase?</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        <a href="{% url 'cancel_membership_purchase'  %}" type="submit" class="btn btn-primary">Yes</a>
+                    </div>
+                </form>
             </div>
-            <form action="{% url 'update_membership' %}" method="POST" id="update_membership-form">
-            {% csrf_token %}
-            <div class="modal-body">
-              <div class="membership-modal">
-                <p>Are you sure you want to cancel your membership purchase?</p>
-              </div>
-            </div>
-            <div class="modal-footer">
-               {{order.order_number}}
-              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-              <a href="{% url 'cancel_membership_purchase'  %}" type="submit" class="btn btn-primary">Yes</a>
-            </div>
-          </form>
-          </div>
         </div>
-      </div>
-
+    </div>
 {% endblock %}
 
 {% block postload_js %}

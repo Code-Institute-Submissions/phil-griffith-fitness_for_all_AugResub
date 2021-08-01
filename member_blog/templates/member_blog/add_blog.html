@@ -5,10 +5,7 @@
     <link rel="stylesheet" href="{% static 'member_blog/css/member_blog.css' %}">
 {% endblock %}
 
-{% block content %}
-    
-
-   
+{% block content %}  
     <div class="container">
         <h1 class="display-4 text-success">Add Blog</h1>
         <div class="col-12">
@@ -17,8 +14,7 @@
                 <div class="row p-4">
                     <div class="col-12">
                         <span>User:</span>
-                        {{ blog.user}}
-    
+                        {{ blog.user}}    
                         <p>Date: {{ blog.date }}</p>
                         <h4>{{ blog.title }}</h4>
                         <p>{{ blog.comment }}</p>
@@ -35,8 +31,6 @@
                     <button class="btn btn-success">Submit</button>        
                 </form>
             </div>
-
         </div>
-
     </div>
 {% endblock %}

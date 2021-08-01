@@ -1,17 +1,18 @@
 from django import forms
 from allauth.account.forms import SignupForm
 from .models import UserProfile
-from datetime import datetime, timedelta
 
 # Code taken from Code Institute Boutique Ado project
-
 
 
 class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user', 'date_joined', 'membership_expiry_date', 'expired_full_member', 'membership_level', 'membership_level_selected','membership_fee_due', 'full_member' )
+        exclude = ('user', 'date_joined', 'membership_expiry_date',
+                   'expired_full_member', 'membership_level',
+                   'membership_level_selected','membership_fee_due',
+                   'full_member')
         # https://stackoverflow.com/questions/8761106/how-can-i-get-a-textarea-from-modelmodelform
         widgets = {
             'goal': forms.Textarea(attrs={'cols': 80, 'rows': 5}),
@@ -40,7 +41,10 @@ class UserProfileForm(forms.ModelForm):
         self.fields['default_phone_number'].widget.attrs['autofocus'] = True
         
         for field in self.fields:
-            if field not in ('default_country', 'date_joined', 'membership_expiry_date', 'expired_full_member', 'membership_level', 'membership_fee_due', 'full_member'):
+            if field not in ('default_country', 'date_joined',
+                             'membership_expiry_date', 'expired_full_member',
+                             'membership_level', 'membership_fee_due',
+                             'full_member'):
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:
@@ -62,7 +66,8 @@ class CustomSignupForm(SignupForm):
 
     first_name = forms.CharField(max_length=30, label='First Name')
     last_name = forms.CharField(max_length=30, label='Last Name')
-    membership_level_selected = forms.ChoiceField(choices=(MEMBERSHIP_LEVEL_SELECTED),  label='Membership Level')
+    membership_level_selected = forms.ChoiceField(
+        choices=(MEMBERSHIP_LEVEL_SELECTED),  label='Membership Level')
 
     def signup(self, request, user):
         profile = models.UserProfile.objects.get_or_create(user=user)

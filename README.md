@@ -1,4 +1,4 @@
-![Hero Screenshot](documents/images/hero.png)
+![Hero Screenshot](documents/images/hero_image.png)
 
 [Fitness For All](https://fitness-for-all.herokuapp.com/)
 
@@ -99,6 +99,10 @@ The following sites were used for icon creation
 * [Favicon.io](https://favicon.io/).
 
 <a name="colours"></a>
+
+### **Colours** ###
+
+The colours chosen for this site are predominantly various shades of green to represent health.
 
 <a name="features"></a>
 ## Features ## 
@@ -219,20 +223,6 @@ The following sites were used for icon creation
 ![](documentation/images/delete_workout_confirm.png)
 
 
-**Sign In**
-
-* Incorrect username or password entered
-
-![](documentation/images/incorrect_password.png)
-
-**Register**
-
-* Incorrect confirm password entered
-
-![](documents/images/reg_pass.png)
-
-&nbsp;
-
 
 
 &nbsp;
@@ -241,26 +231,19 @@ The following sites were used for icon creation
 ## Technologies, libraries and tools used ##
 ---
 
-**Front-End**
+* [Django](https://www.djangoproject.com/)
 * [Bootstrap](https://bootstrap4.com/)
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 * [Font-Awesome](https://fontawesome.com/)
 * [Google fonts](https://fonts.google.com/)
-
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 * [Javascript](https://www.javascript.com/)
-
-* [materializecss](https://materializecss.com/)
 * [favicon.io](https://materializecss.com/)
-
-**Back-end**
 * [Flask](https://flask.palletsprojects.com/en/1.1.x/)
 * [Jinja](https://jinja.palletsprojects.com/en/2.11.x/)
 * [MongoDB](https://www.mongodb.com/1)
 * [Python](https://www.python.org/)
 * [Werkzeug](https://werkzeug.palletsprojects.com/en/1.0.x/)
-
-**Deployment**
 * [Heroku](https://dashboard.heroku.com/)
 * [Git](https://git-scm.com/)
 * [Github](https://github.com/)
@@ -275,16 +258,14 @@ The following sites were used for icon creation
 Details of all tests that were performed can be found [here](documents/testing.md)
 
 In order to test this site as admin you will need the following credentials:
-* Username: admin
-* Password: Password1
+* Username: ffa_admin
+* Password: fitnessforall
 
 <a name="issues"></a>
 ### Issues identified and fixed ###
 
-* Incorrect Recipes deleting & Removing from Favourites
-    * Issue was caused by a modal generation in for loop taking the same ID for every modal. Fixed by appending {{ loop.index }} to modal id
-* Change Password modal trying to flash messages to deleted my account page
-    * Fixed by changing modal to a Change password page where flash message can be displayed until password is successfully changed and then redirect to Home page
+* Non editable form fields displayed on Edit Profile page
+    * Issue correct by added the relevant fields to the exclude section of the Meta class in the Profiles form
 
 In addition to the tests that were completed in the testing document, all code has been tested using the following code validators.
 
@@ -297,61 +278,70 @@ In addition to the tests that were completed in the testing document, all code h
 ## Deployment ##
 ---
 
+### External account requirements ####
+
+Fot this app to be fully functionally locally and on Heroku, the following are required.
+
+* Valid email account with third party app access enabled
+* stripe account with webhook configured for payment confirmation
+
 ### Local Deployment ###
 
 * Open browser of choice.
-* Copy/Paste the address of [World Recipes](https://github.com/phil-griffith/world_recipes) in your search box.
+* Copy/Paste the address of [Fitness For All](https://github.com/phil-griffith/fitness_for_all) in your search box.
 * When on the page, click on the "Code" button.
-* Copy the the [HTTPS Link](https://github.com/phil-griffith/world_recipes).
+* Copy the the [HTTPS Link](https://github.com/phil-griffith/fitness_for_all).
 * Open your IDE and in your terminal, create a virtual environment supporting python and flask and activate it.
-* Type "git clone" and paste the [HTTPS Link](https://github.com/phil-griffith/world_recipes).
-* Create an environement file called "env.py" and add :
-    - MONGO_URI=mongodb+srv://...
-    - SECRET_KEY= [Your Secret key]
+* Type "git clone" and paste the [HTTPS Link]https://github.com/phil-griffith/fitness_for_all).
+* Setup environment variables and add to env.py or IDE
 * Add your env.py to .gitignore. to avoid it being uploaded.
 * In app.py, switch **debug=False** to **debug=True**
 * Upgrade pip locally with the command "pip install -U pip".
 * Install the modules used to run the application using "pip freeze > requirements.txt" in your terminal.
-* Create a MongoDB account and create a database called **"world_recipes"**.
-* Add documtents to database collection as per [database design](#database)
-
-
-
-
+* Run Migrations to update the database
 * You can now run your application locally by typing the command "python3 app.py" or "run app.py" in your terminal.
 * You can visit the website at http://127.0.0.1:5000
 
+
 ## Deploying on Heroku<hr>
+
+- Create AWS S3 Bucket (or similar) for static file storage and add details to settings.py
 
 - Create a requirements.txt file using the command **pip3 freeze --local > requirements.txt** in your CLI.
 - Create a Procfile (always with an uppercase P) through the command **echo web: python app.py > Procfile**. Commit and Push.
 - Create an account on [**Heroku**](https://www.heroku.com/home).
 - Create a new app (select nearest region).
 
-    ![](documents/images/Heroku_new_app.png)
+    ![](documentation/images/Heroku_new_app.png)
 
-    ![](documents/images/Heroku_new_app2.png)
+
 
 - Link app to your **Github repository** in the **deployment** section.
 
-     ![](documents/images/Heroku_new_app3.png)
+     ![](documentation/images/Heroku_new_app3.png)
 
 - Navigate to Haroku Settings and set up the following in **Config Vars**
     
-    * IP
-    * MONGO_DBNAME
-    * MONGO_URI
-    * PORT
+    * AWS_ACCESS_KEY_ID
+    * AWS_SECRET_ACCESS_KEY
+    * AWS_SECRET_KEY_ID
+    * DATABASE_URL
+    * EMAIL_HOST_PASS
+    * EMAIL_HOST_USER
     * SECRET_KEY
-    * KEY
+    * STRIPE_PUBLIC_KEY
+    * STRIPE_SECRET_KEY
+    * STRIPE_WH_SECRET
+    * USE_AWS
 
-
-
-
+- Add Heroku Postgres for the database and add details to settings.py
+  Note this will require migrations to be run
 
 * Go back to the Deploy section, select the master branch and deploy the project. 
 
-    ![](documents/images/Heroku_new_app4.png)
+    ![](documentation/images/Heroku_new_app4.png)
+
+
 
 
 <a name="credits"></a>
@@ -359,19 +349,47 @@ In addition to the tests that were completed in the testing document, all code h
 ---
 
 * CODE
-    * The code and design for the Sign in, Registration and Recipe forms is largely based on the Code Institute Mini Project (Task Manager)
-    * Some of the logic for User Recipe likes and favourites was taken from [jinja.palletsprojects.com](https://jinja.palletsprojects.com/en/2.10.x/templates/#assignments)
-    * CSS for the responsive text ellipsis effects for recipe cards was taken from [stackoverflow.com](https://stackoverflow.com/questions/33058004/applying-an-ellipsis-to-multiline-text)
+    * The code and design for the Sign in, Registration and Shop is largely based on the Code Institute Project (Boutique Ado)
 
 
-* Recipes
-    * https://www.bbcgoodfood.com/recipes/sausages-winter-veg-mash
-    * https://www.bbc.co.uk/food/recipes/spaghetti_bolognese_with_23409
-    * https://www.bbc.co.uk/food/recipes/hawaiian_pizza_48114
-    * https://www.japancentre.com/en/recipes/1141-datemaki
+* Shop items
+  * Clothes
+    * https://www.sports-fitness.co.uk/joma-vest-womens-yellow-record-ii-jwrrvy
+    * https://www.sports-fitness.co.uk/joma-vest-girls-green-kids-jgkrvg
 
-* Home page images
-    * https://www.pnas.org/content/116/37/18152.full
-    * https://www.kcrw.com/culture/shows/good-food/sonoran-tortillas-korean-home-cooking-jet-ali-tila/making-korean-meals-at-home-is-easier-than-you-think-says-sohui-kim
+    * https://www.sports-fitness.co.uk/running/clothes/men/new-balance-mens-black-impact-run-5inch-shorts-nbmbir5ish
+    * https://www.sports-fitness.co.uk/running/clothes/men/new-balance-mens-blue-impact-run-tshirt-nbmbirts
+    * https://www.sports-fitness.co.uk/new-balance-womens-accelerate-colorblock-tights-nbwacbt
+
+    * https://www.sports-fitness.co.uk/new-balance-mens-rwt-lightweight-woven-jacket-nbmrwtlwwja
+    * https://www.sports-fitness.co.uk/new-balance-tenacity-dark-teal-training-t-shirt-nbdttt
+  * Equipement
+    * https://www.fitness-superstore.co.uk/body-power-sp-ic20-indoor-studio-cycle.html
+    * https://www.fitness-superstore.co.uk/jordan-fitness-6kg-cast-iron-kettlebell-1.html
+    * https://www.fitness-superstore.co.uk/body-power-65kg-olympic-dumbbell-set.html
+    * https://www.fitness-superstore.co.uk/body-power-85kg-tri-grip-olympic-weight-set-6ft-bar.html
+    * https://www.fitness-superstore.co.uk/bowflex-xtreme-2-se-home-gym.html
+    * https://www.fitness-superstore.co.uk/bh-fitness-pioneer-r3-tredamill.html
+    * https://www.fitness-superstore.co.uk/bh-fitness-mycron-c170-cross-trainer-with-bluetooth-i-concept-technology.html
+  * Accessories
+    * https://www.fitness-superstore.co.uk/body-power-48-x-36-floor-protector-mat.html
+    * https://www.fitness-superstore.co.uk/bowflex-bluetooth-armband.html
+    * https://www.fitness-superstore.co.uk/body-power-gym-ball-55cm-grey.html
+    * https://www.fitness-superstore.co.uk/bodypower-mini-bands-set-of-4.html
+    * https://www.fitness-superstore.co.uk/bodypower-mini-bands-set-of-4.html
+    * https://www.fitness-superstore.co.uk/fitness-mad-blaster-pump.html
+    * https://www.fitness-superstore.co.uk/reebok-step-1.html
+  * Nutrition
+    * https://www.myprotein.com/sports-nutrition/protein-brownie/11094927.html
+    * https://www.myprotein.com/sports-nutrition/vegan-vitamin-d3-softgels/11536717.html
+    * https://www.myprotein.com/sports-nutrition/creatine-monohydrate-tablets/10575029.html?autocomplete=productsuggestion
+    * https://www.myprotein.com/sports-nutrition/pure-caffeine-tablets/10529801.html?autocomplete=productsuggestion
+    * https://www.myprotein.com/sports-nutrition/all-natural-peanut-butter/10530743.html?autocomplete=productsuggestion
+    * https://www.myprotein.com/sports-nutrition/vegan-protein-blend/11776868.html
+
+
+
+* Workout Videos
+    * https.wwww.youtube.com
 
 I would also like to thank my Mentor Aaron Sinnot for all of his advice and my family and friends for testing the site for me
